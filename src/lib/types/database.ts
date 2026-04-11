@@ -16,6 +16,8 @@ export type Idea = {
   competencia: string | null;
   prioridad: "Alta" | "Media" | "Baja";
   estado: "Idea" | "En análisis" | "En desarrollo" | "Descartada";
+  user_name: string | null;
+  user_avatar_url: string | null;
   created_at: string;
   updated_at: string;
 };

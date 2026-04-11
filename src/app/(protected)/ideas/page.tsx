@@ -14,6 +14,11 @@ export default async function IdeasPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <IdeasTable ideas={(ideas ?? []) as Idea[]} userId={user?.id ?? ""} />
+    <IdeasTable
+      ideas={(ideas ?? []) as Idea[]}
+      userId={user?.id ?? ""}
+      userName={user?.user_metadata?.full_name}
+      userAvatarUrl={user?.user_metadata?.avatar_url}
+    />
   );
 }

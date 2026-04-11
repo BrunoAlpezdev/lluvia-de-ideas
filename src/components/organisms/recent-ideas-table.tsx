@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { StatusBadge } from "@/components/atoms/status-badge";
 import { PriorityBadge } from "@/components/atoms/priority-badge";
 import type { Idea } from "@/lib/types/database";
@@ -51,6 +52,7 @@ export function RecentIdeasTable({ ideas }: RecentIdeasTableProps) {
               <TableHead>Estado</TableHead>
               <TableHead>Prioridad</TableHead>
               <TableHead className="text-right">Fecha</TableHead>
+              <TableHead className="w-10" />
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -65,6 +67,17 @@ export function RecentIdeasTable({ ideas }: RecentIdeasTableProps) {
                 </TableCell>
                 <TableCell className="text-right text-sm text-muted-foreground">
                   {new Date(idea.created_at).toLocaleDateString("es-ES")}
+                </TableCell>
+                <TableCell>
+                  <Avatar className="h-7 w-7">
+                    <AvatarImage
+                      src={idea.user_avatar_url ?? undefined}
+                      alt={idea.user_name ?? ""}
+                    />
+                    <AvatarFallback className="text-xs">
+                      {idea.user_name?.[0]?.toUpperCase() ?? "?"}
+                    </AvatarFallback>
+                  </Avatar>
                 </TableCell>
               </TableRow>
             ))}

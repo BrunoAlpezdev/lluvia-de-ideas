@@ -31,9 +31,13 @@ interface IdeaFormSheetProps {
   onOpenChange: (open: boolean) => void;
   idea?: Idea | null;
   userId: string;
+  userName?: string;
+  userAvatarUrl?: string;
 }
 
-const emptyForm: Omit<IdeaInsert, "user_id"> = {
+type FormFields = Omit<IdeaInsert, "user_id" | "user_name" | "user_avatar_url">;
+
+const emptyForm: FormFields = {
   plan_de_negocio: null,
   nombre: "",
   idea: "",
@@ -56,6 +60,8 @@ export function IdeaFormSheet({
   onOpenChange,
   idea,
   userId,
+  userName,
+  userAvatarUrl,
 }: IdeaFormSheetProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -112,7 +118,12 @@ export function IdeaFormSheet({
         toast.success("Idea actualizada");
       }
     } else {
-      const insert: IdeaInsert = { ...form, user_id: userId };
+      const insert: IdeaInsert = {
+        ...form,
+        user_id: userId,
+        user_name: userName ?? null,
+        user_avatar_url: userAvatarUrl ?? null,
+      };
       const { error } = await supabase.from("ideas").insert(insert);
       if (error) {
         toast.error("Error al crear la idea");

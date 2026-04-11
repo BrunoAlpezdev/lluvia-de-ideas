@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { StatusBadge } from "@/components/atoms/status-badge";
 import { PriorityBadge } from "@/components/atoms/priority-badge";
 import { CostBadge } from "@/components/atoms/cost-badge";
@@ -26,6 +27,8 @@ import { Plus } from "lucide-react";
 interface IdeasTableProps {
   ideas: Idea[];
   userId: string;
+  userName?: string;
+  userAvatarUrl?: string;
 }
 
 const tabs = [
@@ -44,7 +47,7 @@ const statusFilter: Record<string, Idea["estado"] | null> = {
   descartadas: "Descartada",
 };
 
-export function IdeasTable({ ideas, userId }: IdeasTableProps) {
+export function IdeasTable({ ideas, userId, userName, userAvatarUrl }: IdeasTableProps) {
   const router = useRouter();
   const [sheetOpen, setSheetOpen] = useState(false);
   const [editingIdea, setEditingIdea] = useState<Idea | null>(null);
@@ -95,7 +98,7 @@ export function IdeasTable({ ideas, userId }: IdeasTableProps) {
   };
 
   return (
-    <>
+    <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Ideas</h1>
         <Button onClick={handleNew} className="gap-1.5">
@@ -104,7 +107,7 @@ export function IdeasTable({ ideas, userId }: IdeasTableProps) {
         </Button>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4">
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
           {tabs.map((tab) => (
             <TabsTrigger key={tab.value} value={tab.value}>
@@ -138,6 +141,7 @@ export function IdeasTable({ ideas, userId }: IdeasTableProps) {
                     <TableHead className="hidden sm:table-cell text-right">
                       Fecha
                     </TableHead>
+                    <TableHead className="w-10" />
                     <TableHead className="w-10" />
                   </TableRow>
                 </TableHeader>
@@ -185,6 +189,8 @@ export function IdeasTable({ ideas, userId }: IdeasTableProps) {
         onOpenChange={setSheetOpen}
         idea={editingIdea}
         userId={userId}
+        userName={userName}
+        userAvatarUrl={userAvatarUrl}
       />
 
       <DeleteIdeaDialog
@@ -194,6 +200,6 @@ export function IdeasTable({ ideas, userId }: IdeasTableProps) {
         ideaName={deletingIdea?.nombre ?? ""}
         loading={deleteLoading}
       />
-    </>
+    </div>
   );
 }
