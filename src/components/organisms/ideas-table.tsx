@@ -175,6 +175,17 @@ export function IdeasTable({ ideas, userId, userName, userAvatarUrl }: IdeasTabl
                           onDelete={() => handleDeleteClick(idea)}
                         />
                       </TableCell>
+                      <TableCell>
+                        <Avatar className="h-7 w-7">
+                          <AvatarImage
+                            src={idea.user_avatar_url ?? undefined}
+                            alt={idea.user_name ?? ""}
+                          />
+                          <AvatarFallback className="text-xs">
+                            {idea.user_name?.[0]?.toUpperCase() ?? "?"}
+                          </AvatarFallback>
+                        </Avatar>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
