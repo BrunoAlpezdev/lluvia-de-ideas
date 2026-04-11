@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { UserAvatar } from "@/components/atoms/user-avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,22 +29,10 @@ export function UserNav({ email, avatarUrl, name }: UserNavProps) {
     router.push("/auth/login");
   };
 
-  const initials = name
-    ? name
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase()
-        .slice(0, 2)
-    : email[0].toUpperCase();
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer rounded-full outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring">
-        <Avatar className="h-8 w-8">
-          <AvatarImage src={avatarUrl} alt={name ?? email} />
-          <AvatarFallback>{initials}</AvatarFallback>
-        </Avatar>
+        <UserAvatar name={name ?? email} avatarUrl={avatarUrl} className="h-8 w-8" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-56">
         <DropdownMenuGroup>

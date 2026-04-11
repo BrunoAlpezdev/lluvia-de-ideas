@@ -8,8 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { UserAvatar } from "@/components/atoms/user-avatar";
 import type { Idea } from "@/lib/types/database";
 import { cn } from "@/lib/utils";
 
@@ -60,9 +60,9 @@ function ColorBadge({
 
 function TextCell({ value, muted }: { value: string | null; muted?: boolean }) {
   if (!value)
-    return <span className="text-muted-foreground/50 text-xs">—</span>;
+    return <span className="text-muted-foreground/40">—</span>;
   return (
-    <span className={cn("text-sm", muted && "text-muted-foreground")}>
+    <span className={cn("text-sm leading-relaxed", muted && "text-muted-foreground")}>
       {value}
     </span>
   );
@@ -79,30 +79,33 @@ export function IdeasDetailTable({ ideas }: IdeasDetailTableProps) {
     );
   }
 
+  const headClass = "text-sm py-4 px-5 whitespace-nowrap";
+  const cellClass = "py-4 px-5";
+
   return (
     <div className="overflow-x-auto rounded-lg border">
       <Table>
         <TableHeader>
-          <TableRow className="bg-muted/50">
-            <TableHead className="sticky left-0 z-10 bg-muted/50 min-w-[160px]">
+          <TableRow>
+            <TableHead className={cn(headClass, "min-w-[180px]")}>
               Nombre
             </TableHead>
-            <TableHead className="min-w-[180px]">Idea</TableHead>
-            <TableHead className="min-w-[100px]">Estado</TableHead>
-            <TableHead className="min-w-[90px]">Prioridad</TableHead>
-            <TableHead className="min-w-[80px]">Costo</TableHead>
-            <TableHead className="min-w-[140px]">Plan de Negocio</TableHead>
-            <TableHead className="min-w-[200px]">Descripcion</TableHead>
-            <TableHead className="min-w-[200px]">Estructura</TableHead>
-            <TableHead className="min-w-[200px]">Planificacion</TableHead>
-            <TableHead className="min-w-[120px]">Plazo</TableHead>
-            <TableHead className="min-w-[180px]">Mercado Objetivo</TableHead>
-            <TableHead className="min-w-[180px]">Competencia</TableHead>
-            <TableHead className="min-w-[180px]">Diferenciador</TableHead>
-            <TableHead className="min-w-[180px]">Proyeccion</TableHead>
-            <TableHead className="min-w-[180px]">Inversion</TableHead>
-            <TableHead className="min-w-[100px] text-right">Fecha</TableHead>
-            <TableHead className="w-10" />
+            <TableHead className={cn(headClass, "min-w-[220px]")}>Idea</TableHead>
+            <TableHead className={cn(headClass, "min-w-[130px]")}>Estado</TableHead>
+            <TableHead className={cn(headClass, "min-w-[110px]")}>Prioridad</TableHead>
+            <TableHead className={cn(headClass, "min-w-[100px]")}>Costo</TableHead>
+            <TableHead className={cn(headClass, "min-w-[160px]")}>Plan de Negocio</TableHead>
+            <TableHead className={cn(headClass, "min-w-[260px]")}>Descripcion</TableHead>
+            <TableHead className={cn(headClass, "min-w-[260px]")}>Estructura</TableHead>
+            <TableHead className={cn(headClass, "min-w-[260px]")}>Planificacion</TableHead>
+            <TableHead className={cn(headClass, "min-w-[130px]")}>Plazo</TableHead>
+            <TableHead className={cn(headClass, "min-w-[220px]")}>Mercado Objetivo</TableHead>
+            <TableHead className={cn(headClass, "min-w-[220px]")}>Competencia</TableHead>
+            <TableHead className={cn(headClass, "min-w-[220px]")}>Diferenciador</TableHead>
+            <TableHead className={cn(headClass, "min-w-[220px]")}>Proyeccion</TableHead>
+            <TableHead className={cn(headClass, "min-w-[220px]")}>Inversion</TableHead>
+            <TableHead className={cn(headClass, "min-w-[110px] text-right")}>Fecha</TableHead>
+            <TableHead className="w-12" />
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -114,64 +117,59 @@ export function IdeasDetailTable({ ideas }: IdeasDetailTableProps) {
                 statusRowAccent[idea.estado] ?? "border-l-transparent"
               )}
             >
-              <TableCell className="sticky left-0 z-10 bg-background font-semibold">
+              <TableCell className={cn(cellClass, "font-semibold text-base")}>
                 {idea.nombre}
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <TextCell value={idea.idea} />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <ColorBadge value={idea.estado} colorMap={statusColor} />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <ColorBadge value={idea.prioridad} colorMap={priorityColor} />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <ColorBadge value={idea.costo} colorMap={costColor} />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <TextCell value={idea.plan_de_negocio} muted />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <TextCell value={idea.descripcion} />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <TextCell value={idea.estructura} />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <TextCell value={idea.planificacion} />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <TextCell value={idea.plazo_estimado} muted />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <TextCell value={idea.mercado_objetivo} />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <TextCell value={idea.competencia} />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <TextCell value={idea.diferenciador_clave} />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <TextCell value={idea.proyeccion} />
               </TableCell>
-              <TableCell>
+              <TableCell className={cellClass}>
                 <TextCell value={idea.inversion} />
               </TableCell>
-              <TableCell className="text-right text-xs text-muted-foreground whitespace-nowrap">
+              <TableCell className={cn(cellClass, "text-right text-sm text-muted-foreground whitespace-nowrap")}>
                 {new Date(idea.created_at).toLocaleDateString("es-ES")}
               </TableCell>
               <TableCell>
-                <Avatar className="h-7 w-7">
-                  <AvatarImage
-                    src={idea.user_avatar_url ?? undefined}
-                    alt={idea.user_name ?? ""}
-                  />
-                  <AvatarFallback className="text-xs">
-                    {idea.user_name?.[0]?.toUpperCase() ?? "?"}
-                  </AvatarFallback>
-                </Avatar>
+                <UserAvatar
+                  name={idea.user_name}
+                  avatarUrl={idea.user_avatar_url}
+                />
               </TableCell>
             </TableRow>
           ))}

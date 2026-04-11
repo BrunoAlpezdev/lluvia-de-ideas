@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { UserAvatar } from "@/components/atoms/user-avatar";
 import { StatusBadge } from "@/components/atoms/status-badge";
 import { PriorityBadge } from "@/components/atoms/priority-badge";
 import type { Idea } from "@/lib/types/database";
@@ -69,15 +69,10 @@ export function RecentIdeasTable({ ideas }: RecentIdeasTableProps) {
                   {new Date(idea.created_at).toLocaleDateString("es-ES")}
                 </TableCell>
                 <TableCell>
-                  <Avatar className="h-7 w-7">
-                    <AvatarImage
-                      src={idea.user_avatar_url ?? undefined}
-                      alt={idea.user_name ?? ""}
-                    />
-                    <AvatarFallback className="text-xs">
-                      {idea.user_name?.[0]?.toUpperCase() ?? "?"}
-                    </AvatarFallback>
-                  </Avatar>
+                  <UserAvatar
+                    name={idea.user_name}
+                    avatarUrl={idea.user_avatar_url}
+                  />
                 </TableCell>
               </TableRow>
             ))}

@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { UserAvatar } from "@/components/atoms/user-avatar";
 import { StatusBadge } from "@/components/atoms/status-badge";
 import { PriorityBadge } from "@/components/atoms/priority-badge";
 import { CostBadge } from "@/components/atoms/cost-badge";
@@ -176,15 +176,10 @@ export function IdeasTable({ ideas, userId, userName, userAvatarUrl }: IdeasTabl
                         />
                       </TableCell>
                       <TableCell>
-                        <Avatar className="h-7 w-7">
-                          <AvatarImage
-                            src={idea.user_avatar_url ?? undefined}
-                            alt={idea.user_name ?? ""}
-                          />
-                          <AvatarFallback className="text-xs">
-                            {idea.user_name?.[0]?.toUpperCase() ?? "?"}
-                          </AvatarFallback>
-                        </Avatar>
+                        <UserAvatar
+                          name={idea.user_name}
+                          avatarUrl={idea.user_avatar_url}
+                        />
                       </TableCell>
                     </TableRow>
                   ))}
