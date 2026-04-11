@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserNav } from "@/components/molecules/user-nav";
-import { Lightbulb, LayoutDashboard, List } from "lucide-react";
+import { Lightbulb, LayoutDashboard, List, TableProperties } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavbarProps {
@@ -15,6 +15,7 @@ interface NavbarProps {
 const navLinks = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/ideas", label: "Ideas", icon: List },
+  { href: "/desglose", label: "Desglose", icon: TableProperties },
 ];
 
 export function Navbar({ email, avatarUrl, name }: NavbarProps) {

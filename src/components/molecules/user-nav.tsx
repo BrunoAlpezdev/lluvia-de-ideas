@@ -46,7 +46,7 @@ export function UserNav({ email, avatarUrl, name }: UserNavProps) {
           <AvatarFallback>{initials}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="min-w-56">
         <DropdownMenuGroup>
           <DropdownMenuLabel>
             <p className="text-sm font-medium">{name ?? "Mi cuenta"}</p>
