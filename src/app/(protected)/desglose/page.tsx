@@ -14,7 +14,9 @@ export default async function DesglosePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Desglose de Ideas</h1>
+        <h1 className="font-heading text-2xl font-bold tracking-tight">
+          Desglose de Ideas
+        </h1>
         <p className="text-muted-foreground mt-1 text-sm">
           Vista completa con todos los campos de cada idea
         </p>
