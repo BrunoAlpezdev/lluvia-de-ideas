@@ -103,6 +103,15 @@ Format:
 - [ ] <specific things to verify>
 ```
 
+## Step 6.5: Create Push Gate Marker
+
+```bash
+BRANCH=$(git rev-parse --abbrev-ref HEAD | sed 's/[^a-zA-Z0-9._-]/-/g')
+touch "/tmp/.prepare-push-passed-${BRANCH}"
+```
+
+This marker allows the push gate hook to verify that prepare-push ran recently.
+
 ## Step 7: Push
 
 ```bash
