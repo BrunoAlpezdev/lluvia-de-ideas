@@ -54,6 +54,7 @@ pnpm format:check          # Check formatting without writing
 ## Formatting
 
 **Run the formatter after every file edit** — this is "format on save":
+
 ```bash
 pnpm exec prettier --write <filepath>
 ```
@@ -63,6 +64,7 @@ The auto-format hook handles this automatically, but run it manually if needed.
 ## Code Quality Rules
 
 ### General
+
 - Don't add features, refactor code, or make "improvements" beyond what was asked
 - Don't add error handling for scenarios that can't happen
 - Don't create helpers or abstractions for one-time operations
@@ -70,6 +72,7 @@ The auto-format hook handles this automatically, but run it manually if needed.
 - Be careful not to introduce security vulnerabilities (XSS, injection, etc.)
 
 ### React
+
 - **useEffect is only for external synchronization** — networks, browser APIs, timers
 - **Prefer event handlers** — update state in response to user interactions, not useEffect
 - **Avoid state derivation in useEffect** — calculate during render instead
@@ -77,11 +80,13 @@ The auto-format hook handles this automatically, but run it manually if needed.
 - **Always provide cleanup** — return a function that undoes setup
 
 ### TypeScript
+
 - Never use `any` — use `unknown` + type narrowing instead
 - Use `@/*` path aliases (maps to `src/*`) — never relative paths like `../../../`
 - Import types with `import type` when importing only types
 
 ### File Organization
+
 - All source files ≤400 lines — split properly when exceeded
 - Co-locate related code (component + its helpers in same directory)
 - Filename convention: kebab-case (e.g., `cost-badge.tsx`, `idea-form-sheet.tsx`)
@@ -97,6 +102,7 @@ src/components/
 ```
 
 ### Rules
+
 - **Dependency direction:** atoms cannot import from molecules/organisms. Molecules can import atoms. Organisms can import both.
 - **Named exports only** — `export function CostBadge()`, not `export default`
 - **Props use `interface`** — define props inline or as `interface ComponentNameProps`
@@ -115,6 +121,7 @@ src/components/
 ## Domain Language
 
 This is a Spanish-language app. Business types use Spanish terms:
+
 - `Idea` — the core entity with fields: `nombre`, `idea`, `descripción`, `plan_de_negocio`, `estructura`, `planificacion`
 - `costo` — cost level: Bajo / Medio / Alto
 - `prioridad` — priority: Alta / Media / Baja

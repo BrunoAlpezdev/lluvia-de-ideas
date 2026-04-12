@@ -61,13 +61,11 @@ Stage formatting changes. If formatting produced changes, commit: `"format: norm
 Run sequentially:
 
 **Lint:**
-
 ```bash
 pnpm lint
 ```
 
 **Build:**
-
 ```bash
 pnpm build
 ```
@@ -92,14 +90,11 @@ If no PR: draft title + body for the user.
 If PR exists: check if description needs updating.
 
 Format:
-
 ```markdown
 ## Summary
-
 <1-3 bullet points>
 
 ## Test plan
-
 - [ ] <specific things to verify>
 ```
 

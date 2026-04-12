@@ -26,20 +26,17 @@ Read the full file for each changed file — not just the diff. Context matters.
 For each changed file, check:
 
 **Correctness:**
-
 - Logic errors, off-by-one, null handling
 - Race conditions in async code
 - Missing error handling at system boundaries
 
 **Architecture:**
-
 - Does the component sit at the correct atomic level? (atom vs molecule vs organism)
 - Atoms must NOT import from molecules or organisms
 - Respects the server/client component boundary (`"use client"` only when needed)
 - Is the code in the right directory?
 
 **Conventions:**
-
 - Named exports (not default exports)
 - Kebab-case filenames
 - `cn()` for Tailwind class merging
@@ -47,19 +44,16 @@ For each changed file, check:
 - `import type` for type-only imports
 
 **Supabase:**
-
 - Server-side data access uses `createClient()` from `@/lib/supabase/server`
 - Client-side uses `createBrowserClient()` from `@/lib/supabase/client`
 - No direct `process.env` access outside `lib/supabase/`
 - Auth checks present in protected routes
 
 **shadcn/ui:**
-
 - No hand-edits to files in `src/components/ui/`
 - Custom styling goes in wrapper components (atoms/molecules)
 
 **Security:**
-
 - No Supabase keys or secrets exposed in client code
 - No hardcoded credentials
 - Input validation at system boundaries
@@ -67,13 +61,13 @@ For each changed file, check:
 
 ## Step 4: Score Each Finding
 
-| Score | Meaning                                      | Report?          |
-| ----- | -------------------------------------------- | ---------------- |
-| 1-3   | Nitpick, personal preference                 | No               |
-| 4-5   | Could be better, minor improvement           | Only if pattern  |
-| 6-7   | Should fix — bug risk, convention violation  | Yes              |
-| 8-9   | Must fix — logic error, security issue       | Yes              |
-| 10    | Critical — data loss, security vulnerability | Yes, block merge |
+| Score | Meaning | Report? |
+|-------|---------|---------|
+| 1-3 | Nitpick, personal preference | No |
+| 4-5 | Could be better, minor improvement | Only if pattern |
+| 6-7 | Should fix — bug risk, convention violation | Yes |
+| 8-9 | Must fix — logic error, security issue | Yes |
+| 10 | Critical — data loss, security vulnerability | Yes, block merge |
 
 **Only report findings 6+.** Low-severity noise makes people ignore reviews.
 
@@ -94,7 +88,6 @@ LGTM otherwise. <one sentence of positive feedback>
 ## Re-Review
 
 When called with "re-review" or previous feedback:
-
 - Mark addressed issues as fixed
 - Verify fixes are correct
 - Only report new issues or regressions
