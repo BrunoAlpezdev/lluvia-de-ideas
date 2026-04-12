@@ -59,10 +59,14 @@ function ColorBadge({
 }
 
 function TextCell({ value, muted }: { value: string | null; muted?: boolean }) {
-  if (!value)
-    return <span className="text-muted-foreground/40">—</span>;
+  if (!value) return <span className="text-muted-foreground/40">—</span>;
   return (
-    <span className={cn("text-sm leading-relaxed", muted && "text-muted-foreground")}>
+    <span
+      className={cn(
+        "text-sm leading-relaxed",
+        muted && "text-muted-foreground",
+      )}
+    >
       {value}
     </span>
   );
@@ -72,9 +76,7 @@ export function IdeasDetailTable({ ideas }: IdeasDetailTableProps) {
   if (ideas.length === 0) {
     return (
       <div className="rounded-lg border border-dashed p-12 text-center">
-        <p className="text-muted-foreground">
-          No hay ideas registradas aun.
-        </p>
+        <p className="text-muted-foreground">No hay ideas registradas aun.</p>
       </div>
     );
   }
@@ -90,21 +92,51 @@ export function IdeasDetailTable({ ideas }: IdeasDetailTableProps) {
             <TableHead className={cn(headClass, "min-w-[180px]")}>
               Nombre
             </TableHead>
-            <TableHead className={cn(headClass, "min-w-[220px]")}>Idea</TableHead>
-            <TableHead className={cn(headClass, "min-w-[130px]")}>Estado</TableHead>
-            <TableHead className={cn(headClass, "min-w-[110px]")}>Prioridad</TableHead>
-            <TableHead className={cn(headClass, "min-w-[100px]")}>Costo</TableHead>
-            <TableHead className={cn(headClass, "min-w-[160px]")}>Plan de Negocio</TableHead>
-            <TableHead className={cn(headClass, "min-w-[260px]")}>Descripcion</TableHead>
-            <TableHead className={cn(headClass, "min-w-[260px]")}>Estructura</TableHead>
-            <TableHead className={cn(headClass, "min-w-[260px]")}>Planificacion</TableHead>
-            <TableHead className={cn(headClass, "min-w-[130px]")}>Plazo</TableHead>
-            <TableHead className={cn(headClass, "min-w-[220px]")}>Mercado Objetivo</TableHead>
-            <TableHead className={cn(headClass, "min-w-[220px]")}>Competencia</TableHead>
-            <TableHead className={cn(headClass, "min-w-[220px]")}>Diferenciador</TableHead>
-            <TableHead className={cn(headClass, "min-w-[220px]")}>Proyeccion</TableHead>
-            <TableHead className={cn(headClass, "min-w-[220px]")}>Inversion</TableHead>
-            <TableHead className={cn(headClass, "min-w-[110px] text-right")}>Fecha</TableHead>
+            <TableHead className={cn(headClass, "min-w-[220px]")}>
+              Idea
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[130px]")}>
+              Estado
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[110px]")}>
+              Prioridad
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[100px]")}>
+              Costo
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[160px]")}>
+              Plan de Negocio
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[260px]")}>
+              Descripcion
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[260px]")}>
+              Estructura
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[260px]")}>
+              Planificacion
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[130px]")}>
+              Plazo
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[220px]")}>
+              Mercado Objetivo
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[220px]")}>
+              Competencia
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[220px]")}>
+              Diferenciador
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[220px]")}>
+              Proyeccion
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[220px]")}>
+              Inversion
+            </TableHead>
+            <TableHead className={cn(headClass, "min-w-[110px] text-right")}>
+              Fecha
+            </TableHead>
             <TableHead className="w-12" />
           </TableRow>
         </TableHeader>
@@ -113,11 +145,11 @@ export function IdeasDetailTable({ ideas }: IdeasDetailTableProps) {
             <TableRow
               key={idea.id}
               className={cn(
-                "border-l-4 hover:bg-muted/30 transition-colors",
-                statusRowAccent[idea.estado] ?? "border-l-transparent"
+                "hover:bg-muted/30 border-l-4 transition-colors",
+                statusRowAccent[idea.estado] ?? "border-l-transparent",
               )}
             >
-              <TableCell className={cn(cellClass, "font-semibold text-base")}>
+              <TableCell className={cn(cellClass, "text-base font-semibold")}>
                 {idea.nombre}
               </TableCell>
               <TableCell className={cellClass}>
@@ -162,7 +194,12 @@ export function IdeasDetailTable({ ideas }: IdeasDetailTableProps) {
               <TableCell className={cellClass}>
                 <TextCell value={idea.inversion} />
               </TableCell>
-              <TableCell className={cn(cellClass, "text-right text-sm text-muted-foreground whitespace-nowrap")}>
+              <TableCell
+                className={cn(
+                  cellClass,
+                  "text-muted-foreground text-right text-sm whitespace-nowrap",
+                )}
+              >
                 {new Date(idea.created_at).toLocaleDateString("es-ES")}
               </TableCell>
               <TableCell>

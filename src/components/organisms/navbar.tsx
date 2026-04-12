@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserNav } from "@/components/molecules/user-nav";
-import { Lightbulb, LayoutDashboard, List, TableProperties } from "lucide-react";
+import {
+  Lightbulb,
+  LayoutDashboard,
+  List,
+  TableProperties,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavbarProps {
@@ -22,7 +27,7 @@ export function Navbar({ email, avatarUrl, name }: NavbarProps) {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 border-b backdrop-blur">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
         <div className="flex items-center gap-6">
           <Link href="/dashboard" className="flex items-center gap-2 font-bold">
@@ -38,10 +43,10 @@ export function Navbar({ email, avatarUrl, name }: NavbarProps) {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors hover:bg-accent",
+                    "hover:bg-accent flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
                     isActive
                       ? "bg-accent text-accent-foreground"
-                      : "text-muted-foreground"
+                      : "text-muted-foreground",
                   )}
                 >
                   <Icon className="h-4 w-4" />

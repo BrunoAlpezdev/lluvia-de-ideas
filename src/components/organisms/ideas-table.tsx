@@ -47,7 +47,12 @@ const statusFilter: Record<string, Idea["estado"] | null> = {
   descartadas: "Descartada",
 };
 
-export function IdeasTable({ ideas, userId, userName, userAvatarUrl }: IdeasTableProps) {
+export function IdeasTable({
+  ideas,
+  userId,
+  userName,
+  userAvatarUrl,
+}: IdeasTableProps) {
   const router = useRouter();
   const [sheetOpen, setSheetOpen] = useState(false);
   const [editingIdea, setEditingIdea] = useState<Idea | null>(null);
@@ -138,7 +143,7 @@ export function IdeasTable({ ideas, userId, userName, userAvatarUrl }: IdeasTabl
                     <TableHead className="hidden lg:table-cell">
                       Plazo
                     </TableHead>
-                    <TableHead className="hidden sm:table-cell text-right">
+                    <TableHead className="hidden text-right sm:table-cell">
                       Fecha
                     </TableHead>
                     <TableHead className="w-10" />
@@ -151,7 +156,7 @@ export function IdeasTable({ ideas, userId, userName, userAvatarUrl }: IdeasTabl
                       <TableCell className="font-medium">
                         {idea.nombre}
                       </TableCell>
-                      <TableCell className="hidden max-w-[200px] truncate md:table-cell text-muted-foreground">
+                      <TableCell className="text-muted-foreground hidden max-w-[200px] truncate md:table-cell">
                         {idea.idea}
                       </TableCell>
                       <TableCell>
@@ -163,10 +168,10 @@ export function IdeasTable({ ideas, userId, userName, userAvatarUrl }: IdeasTabl
                       <TableCell>
                         <StatusBadge estado={idea.estado} />
                       </TableCell>
-                      <TableCell className="hidden lg:table-cell text-sm text-muted-foreground">
+                      <TableCell className="text-muted-foreground hidden text-sm lg:table-cell">
                         {idea.plazo_estimado ?? "—"}
                       </TableCell>
-                      <TableCell className="hidden sm:table-cell text-right text-sm text-muted-foreground">
+                      <TableCell className="text-muted-foreground hidden text-right text-sm sm:table-cell">
                         {new Date(idea.created_at).toLocaleDateString("es-ES")}
                       </TableCell>
                       <TableCell>

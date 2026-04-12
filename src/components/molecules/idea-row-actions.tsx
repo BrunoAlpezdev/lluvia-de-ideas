@@ -16,7 +16,7 @@ interface IdeaRowActionsProps {
 export function IdeaRowActions({ onEdit, onDelete }: IdeaRowActionsProps) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="inline-flex h-8 w-8 items-center justify-center rounded-md hover:bg-accent">
+      <DropdownMenuTrigger className="hover:bg-accent inline-flex h-8 w-8 items-center justify-center rounded-md">
         <MoreHorizontal className="h-4 w-4" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

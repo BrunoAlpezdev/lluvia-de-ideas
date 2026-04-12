@@ -31,14 +31,18 @@ export function UserNav({ email, avatarUrl, name }: UserNavProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="cursor-pointer rounded-full outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring">
-        <UserAvatar name={name ?? email} avatarUrl={avatarUrl} className="h-8 w-8" />
+      <DropdownMenuTrigger className="ring-offset-background focus-visible:ring-ring cursor-pointer rounded-full outline-none focus-visible:ring-2">
+        <UserAvatar
+          name={name ?? email}
+          avatarUrl={avatarUrl}
+          className="h-8 w-8"
+        />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-56">
         <DropdownMenuGroup>
           <DropdownMenuLabel>
             <p className="text-sm font-medium">{name ?? "Mi cuenta"}</p>
-            <p className="text-xs text-muted-foreground">{email}</p>
+            <p className="text-muted-foreground text-xs">{email}</p>
           </DropdownMenuLabel>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

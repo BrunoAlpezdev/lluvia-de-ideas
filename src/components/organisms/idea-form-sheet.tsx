@@ -152,7 +152,7 @@ export function IdeaFormSheet({
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 px-4 pb-4">
           {/* Informacion Basica */}
           <section className="space-y-3">
-            <h3 className="text-sm font-semibold text-muted-foreground">
+            <h3 className="text-muted-foreground text-sm font-semibold">
               Informacion Basica
             </h3>
             <div className="space-y-2">
@@ -204,7 +204,7 @@ export function IdeaFormSheet({
 
           {/* Estructura y Planificacion */}
           <section className="space-y-3">
-            <h3 className="text-sm font-semibold text-muted-foreground">
+            <h3 className="text-muted-foreground text-sm font-semibold">
               Estructura y Planificacion
             </h3>
             <div className="space-y-2">
@@ -242,7 +242,7 @@ export function IdeaFormSheet({
 
           {/* Mercado */}
           <section className="space-y-3">
-            <h3 className="text-sm font-semibold text-muted-foreground">
+            <h3 className="text-muted-foreground text-sm font-semibold">
               Analisis de Mercado
             </h3>
             <div className="space-y-2">
@@ -250,7 +250,9 @@ export function IdeaFormSheet({
               <Textarea
                 id="mercado_objetivo"
                 value={form.mercado_objetivo ?? ""}
-                onChange={(e) => updateField("mercado_objetivo", e.target.value)}
+                onChange={(e) =>
+                  updateField("mercado_objetivo", e.target.value)
+                }
                 rows={2}
                 placeholder="A quien va dirigido..."
               />
@@ -283,7 +285,7 @@ export function IdeaFormSheet({
 
           {/* Financiero */}
           <section className="space-y-3">
-            <h3 className="text-sm font-semibold text-muted-foreground">
+            <h3 className="text-muted-foreground text-sm font-semibold">
               Financiero
             </h3>
             <div className="space-y-2">
@@ -328,7 +330,7 @@ export function IdeaFormSheet({
 
           {/* Clasificacion */}
           <section className="space-y-3">
-            <h3 className="text-sm font-semibold text-muted-foreground">
+            <h3 className="text-muted-foreground text-sm font-semibold">
               Clasificacion
             </h3>
             <div className="grid grid-cols-2 gap-3">

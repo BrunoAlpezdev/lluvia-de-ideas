@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -31,7 +26,7 @@ export function RecentIdeasTable({ ideas }: RecentIdeasTableProps) {
           <CardTitle className="text-sm font-medium">Ideas Recientes</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground text-center py-6">
+          <p className="text-muted-foreground py-6 text-center text-sm">
             No hay ideas registradas. Crea tu primera idea!
           </p>
         </CardContent>
@@ -65,7 +60,7 @@ export function RecentIdeasTable({ ideas }: RecentIdeasTableProps) {
                 <TableCell>
                   <PriorityBadge prioridad={idea.prioridad} />
                 </TableCell>
-                <TableCell className="text-right text-sm text-muted-foreground">
+                <TableCell className="text-muted-foreground text-right text-sm">
                   {new Date(idea.created_at).toLocaleDateString("es-ES")}
                 </TableCell>
                 <TableCell>

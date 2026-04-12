@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge } from "@/components/atoms/status-badge";
 import { PriorityBadge } from "@/components/atoms/priority-badge";
 import { CostBadge } from "@/components/atoms/cost-badge";
@@ -45,7 +40,7 @@ export function StatsGrid({ ideas }: StatsGridProps) {
             <Lightbulb className="h-6 w-6 text-indigo-600" />
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Total de Ideas</p>
+            <p className="text-muted-foreground text-sm">Total de Ideas</p>
             <p className="text-3xl font-bold">{total}</p>
           </div>
         </CardContent>
