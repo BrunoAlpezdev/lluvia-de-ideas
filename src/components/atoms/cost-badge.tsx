@@ -2,9 +2,18 @@ import { Badge } from "@/components/ui/badge";
 import type { Idea } from "@/lib/types/database";
 
 const costConfig: Record<string, { bg: string; dot: string }> = {
-  Bajo: { bg: "bg-[#34d399]/10 text-[#34d399]", dot: "bg-[#34d399]" },
-  Medio: { bg: "bg-[#fbbf24]/10 text-[#fbbf24]", dot: "bg-[#fbbf24]" },
-  Alto: { bg: "bg-[#ff6e84]/10 text-[#ff6e84]", dot: "bg-[#ff6e84]" },
+  Bajo: {
+    bg: "bg-[#34d399]/10 text-[#34d399] border border-[#34d399]/20",
+    dot: "bg-[#34d399]",
+  },
+  Medio: {
+    bg: "bg-[#fbbf24]/10 text-[#fbbf24] border border-[#fbbf24]/20",
+    dot: "bg-[#fbbf24]",
+  },
+  Alto: {
+    bg: "bg-[#ff6e84]/10 text-[#ff6e84] border border-[#ff6e84]/20",
+    dot: "bg-[#ff6e84]",
+  },
 };
 
 export function CostBadge({ costo }: { costo: Idea["costo"] }) {

@@ -88,10 +88,7 @@ export function StatsGrid({ ideas }: StatsGridProps) {
                     <span className="text-muted-foreground text-sm">{s}</span>
                   </div>
                   <span
-                    className={cn(
-                      "rounded px-2 py-0.5 text-xs font-bold",
-                      `bg-[${statusColors[s]}]/10`,
-                    )}
+                    className="rounded px-2 py-0.5 text-xs font-bold"
                     style={{
                       backgroundColor: `${statusColors[s]}1a`,
                       color: statusColors[s],

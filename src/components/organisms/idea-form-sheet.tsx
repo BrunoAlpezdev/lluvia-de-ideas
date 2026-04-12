@@ -23,7 +23,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
 import type { Idea, IdeaInsert, IdeaUpdate } from "@/lib/types/database";
 
 interface IdeaFormSheetProps {
@@ -74,6 +73,14 @@ function getInitialForm(idea?: Idea | null): FormFields {
     prioridad: idea.prioridad,
     estado: idea.estado,
   };
+}
+
+function SectionNumber({ n }: { n: string }) {
+  return (
+    <span className="bg-primary/20 text-primary flex h-6 w-6 items-center justify-center rounded text-xs font-bold">
+      {n}
+    </span>
+  );
 }
 
 export function IdeaFormSheet({
@@ -136,7 +143,7 @@ export function IdeaFormSheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="overflow-y-auto sm:max-w-lg">
+      <SheetContent side="right" className="overflow-y-auto sm:max-w-xl">
         <SheetHeader>
           <SheetTitle>{isEditing ? "Editar idea" : "Nueva idea"}</SheetTitle>
           <SheetDescription>
@@ -146,14 +153,20 @@ export function IdeaFormSheet({
           </SheetDescription>
         </SheetHeader>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6 px-4 pb-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8 px-4 pb-4">
           {/* Informacion Basica */}
           <section className="space-y-3">
-            <h3 className="font-heading text-muted-foreground text-sm font-semibold tracking-tight">
+            <h3 className="text-muted-foreground flex items-center gap-2 text-sm font-bold tracking-[0.2em] uppercase">
+              <SectionNumber n="01" />
               Informacion Basica
             </h3>
             <div className="space-y-2">
-              <Label htmlFor="plan_de_negocio">Plan de Negocio</Label>
+              <Label
+                htmlFor="plan_de_negocio"
+                className="text-muted-foreground mb-2 text-xs font-medium"
+              >
+                Plan de Negocio
+              </Label>
               <Input
                 id="plan_de_negocio"
                 value={form.plan_de_negocio ?? ""}
@@ -162,7 +175,10 @@ export function IdeaFormSheet({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="nombre">
+              <Label
+                htmlFor="nombre"
+                className="text-muted-foreground mb-2 text-xs font-medium"
+              >
                 Nombre <span className="text-destructive">*</span>
               </Label>
               <Input
@@ -174,7 +190,10 @@ export function IdeaFormSheet({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="idea">
+              <Label
+                htmlFor="idea"
+                className="text-muted-foreground mb-2 text-xs font-medium"
+              >
                 Idea <span className="text-destructive">*</span>
               </Label>
               <Input
@@ -186,7 +205,12 @@ export function IdeaFormSheet({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="descripcion">Descripcion</Label>
+              <Label
+                htmlFor="descripcion"
+                className="text-muted-foreground mb-2 text-xs font-medium"
+              >
+                Descripcion
+              </Label>
               <Textarea
                 id="descripcion"
                 value={form.descripcion ?? ""}
@@ -197,15 +221,19 @@ export function IdeaFormSheet({
             </div>
           </section>
 
-          <Separator />
-
           {/* Estructura y Planificacion */}
           <section className="space-y-3">
-            <h3 className="font-heading text-muted-foreground text-sm font-semibold tracking-tight">
+            <h3 className="text-muted-foreground flex items-center gap-2 text-sm font-bold tracking-[0.2em] uppercase">
+              <SectionNumber n="02" />
               Estructura y Planificacion
             </h3>
             <div className="space-y-2">
-              <Label htmlFor="estructura">Estructura</Label>
+              <Label
+                htmlFor="estructura"
+                className="text-muted-foreground mb-2 text-xs font-medium"
+              >
+                Estructura
+              </Label>
               <Textarea
                 id="estructura"
                 value={form.estructura ?? ""}
@@ -215,7 +243,12 @@ export function IdeaFormSheet({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="planificacion">Planificacion</Label>
+              <Label
+                htmlFor="planificacion"
+                className="text-muted-foreground mb-2 text-xs font-medium"
+              >
+                Planificacion
+              </Label>
               <Textarea
                 id="planificacion"
                 value={form.planificacion ?? ""}
@@ -225,7 +258,12 @@ export function IdeaFormSheet({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="plazo_estimado">Plazo Estimado</Label>
+              <Label
+                htmlFor="plazo_estimado"
+                className="text-muted-foreground mb-2 text-xs font-medium"
+              >
+                Plazo Estimado
+              </Label>
               <Input
                 id="plazo_estimado"
                 value={form.plazo_estimado ?? ""}
@@ -235,15 +273,19 @@ export function IdeaFormSheet({
             </div>
           </section>
 
-          <Separator />
-
           {/* Mercado */}
           <section className="space-y-3">
-            <h3 className="font-heading text-muted-foreground text-sm font-semibold tracking-tight">
+            <h3 className="text-muted-foreground flex items-center gap-2 text-sm font-bold tracking-[0.2em] uppercase">
+              <SectionNumber n="03" />
               Analisis de Mercado
             </h3>
             <div className="space-y-2">
-              <Label htmlFor="mercado_objetivo">Mercado Objetivo</Label>
+              <Label
+                htmlFor="mercado_objetivo"
+                className="text-muted-foreground mb-2 text-xs font-medium"
+              >
+                Mercado Objetivo
+              </Label>
               <Textarea
                 id="mercado_objetivo"
                 value={form.mercado_objetivo ?? ""}
@@ -255,7 +297,12 @@ export function IdeaFormSheet({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="competencia">Competencia</Label>
+              <Label
+                htmlFor="competencia"
+                className="text-muted-foreground mb-2 text-xs font-medium"
+              >
+                Competencia
+              </Label>
               <Textarea
                 id="competencia"
                 value={form.competencia ?? ""}
@@ -265,7 +312,12 @@ export function IdeaFormSheet({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="diferenciador_clave">Diferenciador Clave</Label>
+              <Label
+                htmlFor="diferenciador_clave"
+                className="text-muted-foreground mb-2 text-xs font-medium"
+              >
+                Diferenciador Clave
+              </Label>
               <Textarea
                 id="diferenciador_clave"
                 value={form.diferenciador_clave ?? ""}
@@ -278,15 +330,16 @@ export function IdeaFormSheet({
             </div>
           </section>
 
-          <Separator />
-
           {/* Financiero */}
           <section className="space-y-3">
-            <h3 className="font-heading text-muted-foreground text-sm font-semibold tracking-tight">
+            <h3 className="text-muted-foreground flex items-center gap-2 text-sm font-bold tracking-[0.2em] uppercase">
+              <SectionNumber n="04" />
               Financiero
             </h3>
             <div className="space-y-2">
-              <Label>Costo</Label>
+              <Label className="text-muted-foreground mb-2 text-xs font-medium">
+                Costo
+              </Label>
               <Select
                 value={form.costo ?? undefined}
                 onValueChange={(val) => updateField("costo", val as string)}
@@ -302,7 +355,12 @@ export function IdeaFormSheet({
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="proyeccion">Proyeccion</Label>
+              <Label
+                htmlFor="proyeccion"
+                className="text-muted-foreground mb-2 text-xs font-medium"
+              >
+                Proyeccion
+              </Label>
               <Textarea
                 id="proyeccion"
                 value={form.proyeccion ?? ""}
@@ -312,7 +370,12 @@ export function IdeaFormSheet({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="inversion">Inversion Inicial</Label>
+              <Label
+                htmlFor="inversion"
+                className="text-muted-foreground mb-2 text-xs font-medium"
+              >
+                Inversion Inicial
+              </Label>
               <Textarea
                 id="inversion"
                 value={form.inversion ?? ""}
@@ -323,16 +386,17 @@ export function IdeaFormSheet({
             </div>
           </section>
 
-          <Separator />
-
           {/* Clasificacion */}
           <section className="space-y-3">
-            <h3 className="font-heading text-muted-foreground text-sm font-semibold tracking-tight">
+            <h3 className="text-muted-foreground flex items-center gap-2 text-sm font-bold tracking-[0.2em] uppercase">
+              <SectionNumber n="05" />
               Clasificacion
             </h3>
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-2">
-                <Label>Prioridad</Label>
+                <Label className="text-muted-foreground mb-2 text-xs font-medium">
+                  Prioridad
+                </Label>
                 <Select
                   value={form.prioridad}
                   onValueChange={(val) =>
@@ -350,7 +414,9 @@ export function IdeaFormSheet({
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label>Estado</Label>
+                <Label className="text-muted-foreground mb-2 text-xs font-medium">
+                  Estado
+                </Label>
                 <Select
                   value={form.estado}
                   onValueChange={(val) => updateField("estado", val as string)}
@@ -374,7 +440,7 @@ export function IdeaFormSheet({
               type="submit"
               disabled={loading}
               variant="gradient"
-              className="w-full"
+              className="w-full text-sm font-extrabold tracking-widest uppercase"
             >
               {loading
                 ? "Guardando..."
