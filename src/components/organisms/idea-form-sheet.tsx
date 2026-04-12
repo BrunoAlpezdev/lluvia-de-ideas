@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -37,23 +37,44 @@ interface IdeaFormSheetProps {
 
 type FormFields = Omit<IdeaInsert, "user_id" | "user_name" | "user_avatar_url">;
 
-const emptyForm: FormFields = {
-  plan_de_negocio: null,
-  nombre: "",
-  idea: "",
-  descripcion: null,
-  estructura: null,
-  planificacion: null,
-  costo: null,
-  proyeccion: null,
-  inversion: null,
-  mercado_objetivo: null,
-  diferenciador_clave: null,
-  plazo_estimado: null,
-  competencia: null,
-  prioridad: "Media",
-  estado: "Idea",
-};
+function getInitialForm(idea?: Idea | null): FormFields {
+  if (!idea) {
+    return {
+      plan_de_negocio: null,
+      nombre: "",
+      idea: "",
+      descripcion: null,
+      estructura: null,
+      planificacion: null,
+      costo: null,
+      proyeccion: null,
+      inversion: null,
+      mercado_objetivo: null,
+      diferenciador_clave: null,
+      plazo_estimado: null,
+      competencia: null,
+      prioridad: "Media",
+      estado: "Idea",
+    };
+  }
+  return {
+    plan_de_negocio: idea.plan_de_negocio,
+    nombre: idea.nombre,
+    idea: idea.idea,
+    descripcion: idea.descripcion,
+    estructura: idea.estructura,
+    planificacion: idea.planificacion,
+    costo: idea.costo,
+    proyeccion: idea.proyeccion,
+    inversion: idea.inversion,
+    mercado_objetivo: idea.mercado_objetivo,
+    diferenciador_clave: idea.diferenciador_clave,
+    plazo_estimado: idea.plazo_estimado,
+    competencia: idea.competencia,
+    prioridad: idea.prioridad,
+    estado: idea.estado,
+  };
+}
 
 export function IdeaFormSheet({
   open,
@@ -65,35 +86,11 @@ export function IdeaFormSheet({
 }: IdeaFormSheetProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState(emptyForm);
+  const [form, setForm] = useState<FormFields>(() => getInitialForm(idea));
   const isEditing = !!idea;
 
-  useEffect(() => {
-    if (idea) {
-      setForm({
-        plan_de_negocio: idea.plan_de_negocio,
-        nombre: idea.nombre,
-        idea: idea.idea,
-        descripcion: idea.descripcion,
-        estructura: idea.estructura,
-        planificacion: idea.planificacion,
-        costo: idea.costo,
-        proyeccion: idea.proyeccion,
-        inversion: idea.inversion,
-        mercado_objetivo: idea.mercado_objetivo,
-        diferenciador_clave: idea.diferenciador_clave,
-        plazo_estimado: idea.plazo_estimado,
-        competencia: idea.competencia,
-        prioridad: idea.prioridad,
-        estado: idea.estado,
-      });
-    } else {
-      setForm(emptyForm);
-    }
-  }, [idea]);
-
   const updateField = (field: string, value: string | null) => {
-    setForm((prev) => ({ ...prev, [field]: value || null }));
+    setForm((prev: FormFields) => ({ ...prev, [field]: value || null }));
   };
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
@@ -152,7 +149,7 @@ export function IdeaFormSheet({
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 px-4 pb-4">
           {/* Informacion Basica */}
           <section className="space-y-3">
-            <h3 className="text-muted-foreground text-sm font-semibold">
+            <h3 className="font-heading text-muted-foreground text-sm font-semibold tracking-tight">
               Informacion Basica
             </h3>
             <div className="space-y-2">
@@ -166,7 +163,7 @@ export function IdeaFormSheet({
             </div>
             <div className="space-y-2">
               <Label htmlFor="nombre">
-                Nombre <span className="text-red-500">*</span>
+                Nombre <span className="text-destructive">*</span>
               </Label>
               <Input
                 id="nombre"
@@ -178,7 +175,7 @@ export function IdeaFormSheet({
             </div>
             <div className="space-y-2">
               <Label htmlFor="idea">
-                Idea <span className="text-red-500">*</span>
+                Idea <span className="text-destructive">*</span>
               </Label>
               <Input
                 id="idea"
@@ -204,7 +201,7 @@ export function IdeaFormSheet({
 
           {/* Estructura y Planificacion */}
           <section className="space-y-3">
-            <h3 className="text-muted-foreground text-sm font-semibold">
+            <h3 className="font-heading text-muted-foreground text-sm font-semibold tracking-tight">
               Estructura y Planificacion
             </h3>
             <div className="space-y-2">
@@ -242,7 +239,7 @@ export function IdeaFormSheet({
 
           {/* Mercado */}
           <section className="space-y-3">
-            <h3 className="text-muted-foreground text-sm font-semibold">
+            <h3 className="font-heading text-muted-foreground text-sm font-semibold tracking-tight">
               Analisis de Mercado
             </h3>
             <div className="space-y-2">
@@ -285,7 +282,7 @@ export function IdeaFormSheet({
 
           {/* Financiero */}
           <section className="space-y-3">
-            <h3 className="text-muted-foreground text-sm font-semibold">
+            <h3 className="font-heading text-muted-foreground text-sm font-semibold tracking-tight">
               Financiero
             </h3>
             <div className="space-y-2">
@@ -330,7 +327,7 @@ export function IdeaFormSheet({
 
           {/* Clasificacion */}
           <section className="space-y-3">
-            <h3 className="text-muted-foreground text-sm font-semibold">
+            <h3 className="font-heading text-muted-foreground text-sm font-semibold tracking-tight">
               Clasificacion
             </h3>
             <div className="grid grid-cols-2 gap-3">
@@ -373,7 +370,12 @@ export function IdeaFormSheet({
           </section>
 
           <SheetFooter className="p-0">
-            <Button type="submit" disabled={loading} className="w-full">
+            <Button
+              type="submit"
+              disabled={loading}
+              variant="gradient"
+              className="w-full"
+            >
               {loading
                 ? "Guardando..."
                 : isEditing

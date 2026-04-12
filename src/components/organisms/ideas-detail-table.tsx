@@ -18,29 +18,29 @@ interface IdeasDetailTableProps {
 }
 
 const priorityColor: Record<string, string> = {
-  Alta: "bg-red-100 text-red-800 border-red-200",
-  Media: "bg-yellow-100 text-yellow-800 border-yellow-200",
-  Baja: "bg-green-100 text-green-800 border-green-200",
+  Alta: "bg-[#ff6e84]/10 text-[#ff6e84]",
+  Media: "bg-[#fbbf24]/10 text-[#fbbf24]",
+  Baja: "bg-[#34d399]/10 text-[#34d399]",
 };
 
 const statusColor: Record<string, string> = {
-  Idea: "bg-blue-100 text-blue-800 border-blue-200",
-  "En análisis": "bg-purple-100 text-purple-800 border-purple-200",
-  "En desarrollo": "bg-orange-100 text-orange-800 border-orange-200",
-  Descartada: "bg-gray-100 text-gray-800 border-gray-200",
+  Idea: "bg-[#a7a5ff]/10 text-[#a7a5ff]",
+  "En análisis": "bg-[#ac8aff]/10 text-[#ac8aff]",
+  "En desarrollo": "bg-[#f97316]/10 text-[#f97316]",
+  Descartada: "bg-[#6d758c]/10 text-[#6d758c]",
 };
 
 const costColor: Record<string, string> = {
-  Bajo: "bg-emerald-50 text-emerald-700 border-emerald-200",
-  Medio: "bg-amber-50 text-amber-700 border-amber-200",
-  Alto: "bg-rose-50 text-rose-700 border-rose-200",
+  Bajo: "bg-[#34d399]/10 text-[#34d399]",
+  Medio: "bg-[#fbbf24]/10 text-[#fbbf24]",
+  Alto: "bg-[#ff6e84]/10 text-[#ff6e84]",
 };
 
 const statusRowAccent: Record<string, string> = {
-  Idea: "border-l-blue-400",
-  "En análisis": "border-l-purple-400",
-  "En desarrollo": "border-l-orange-400",
-  Descartada: "border-l-gray-400",
+  Idea: "border-l-[#a7a5ff]",
+  "En análisis": "border-l-[#ac8aff]",
+  "En desarrollo": "border-l-[#f97316]",
+  Descartada: "border-l-[#6d758c]",
 };
 
 function ColorBadge({
@@ -52,9 +52,7 @@ function ColorBadge({
 }) {
   if (!value) return <span className="text-muted-foreground">—</span>;
   return (
-    <Badge className={cn("border font-medium", colorMap[value] ?? "")}>
-      {value}
-    </Badge>
+    <Badge className={cn("font-medium", colorMap[value] ?? "")}>{value}</Badge>
   );
 }
 
@@ -75,7 +73,7 @@ function TextCell({ value, muted }: { value: string | null; muted?: boolean }) {
 export function IdeasDetailTable({ ideas }: IdeasDetailTableProps) {
   if (ideas.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed p-12 text-center">
+      <div className="border-border/50 rounded-lg border border-dashed p-12 text-center">
         <p className="text-muted-foreground">No hay ideas registradas aun.</p>
       </div>
     );
@@ -85,7 +83,7 @@ export function IdeasDetailTable({ ideas }: IdeasDetailTableProps) {
   const cellClass = "py-4 px-5";
 
   return (
-    <div className="overflow-x-auto rounded-lg border">
+    <div className="overflow-x-auto rounded-lg">
       <Table>
         <TableHeader>
           <TableRow>
@@ -145,7 +143,7 @@ export function IdeasDetailTable({ ideas }: IdeasDetailTableProps) {
             <TableRow
               key={idea.id}
               className={cn(
-                "hover:bg-muted/30 border-l-4 transition-colors",
+                "border-l-4 transition-colors",
                 statusRowAccent[idea.estado] ?? "border-l-transparent",
               )}
             >

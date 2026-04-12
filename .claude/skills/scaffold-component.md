@@ -24,6 +24,7 @@ Then ask: component name.
 ## Before Generating
 
 **Read 2-3 similar existing files** in the target directory to understand:
+
 - Import paths and patterns
 - Naming conventions
 - Directory structure

@@ -13,7 +13,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserAvatar } from "@/components/atoms/user-avatar";
 import { StatusBadge } from "@/components/atoms/status-badge";
 import { PriorityBadge } from "@/components/atoms/priority-badge";
@@ -22,6 +21,7 @@ import { IdeaRowActions } from "@/components/molecules/idea-row-actions";
 import { IdeaFormSheet } from "@/components/organisms/idea-form-sheet";
 import { DeleteIdeaDialog } from "@/components/organisms/delete-idea-dialog";
 import type { Idea } from "@/lib/types/database";
+import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
 
 interface IdeasTableProps {
@@ -105,97 +105,117 @@ export function IdeasTable({
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Ideas</h1>
-        <Button onClick={handleNew} className="gap-1.5">
+        <div>
+          <h1 className="font-heading text-4xl font-bold tracking-tighter uppercase italic">
+            IDEAS
+          </h1>
+          <p className="text-muted-foreground mt-1 max-w-md text-sm">
+            Gestiona y organiza todas tus ideas de negocio
+          </p>
+        </div>
+        <Button
+          onClick={handleNew}
+          variant="gradient"
+          className="shadow-primary/10 gap-1.5 rounded-xl px-6 py-3 shadow-lg"
+        >
           <Plus className="h-4 w-4" />
           Nueva Idea
         </Button>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList>
-          {tabs.map((tab) => (
-            <TabsTrigger key={tab.value} value={tab.value}>
-              {tab.label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+      <div className="mb-8 flex items-center gap-2">
+        {tabs.map((tab) => (
+          <button
+            key={tab.value}
+            type="button"
+            onClick={() => setActiveTab(tab.value)}
+            className={cn(
+              "rounded-full px-5 py-2 text-xs transition-colors",
+              activeTab === tab.value
+                ? "bg-primary text-primary-foreground font-bold"
+                : "bg-muted text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
 
-        <TabsContent value={activeTab} className="mt-4">
-          {filteredIdeas.length === 0 ? (
-            <div className="rounded-lg border border-dashed p-12 text-center">
-              <p className="text-muted-foreground">
-                {activeTab === "todas"
-                  ? "No hay ideas registradas. Crea tu primera idea!"
-                  : "No hay ideas en esta categoria."}
-              </p>
-            </div>
-          ) : (
-            <div className="rounded-lg border">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Nombre</TableHead>
-                    <TableHead className="hidden md:table-cell">Idea</TableHead>
-                    <TableHead>Costo</TableHead>
-                    <TableHead>Prioridad</TableHead>
-                    <TableHead>Estado</TableHead>
-                    <TableHead className="hidden lg:table-cell">
-                      Plazo
-                    </TableHead>
-                    <TableHead className="hidden text-right sm:table-cell">
-                      Fecha
-                    </TableHead>
-                    <TableHead className="w-10" />
-                    <TableHead className="w-10" />
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredIdeas.map((idea) => (
-                    <TableRow key={idea.id}>
-                      <TableCell className="font-medium">
+      {filteredIdeas.length === 0 ? (
+        <div className="border-border/50 rounded-xl border border-dashed p-12 text-center">
+          <p className="text-muted-foreground">
+            {activeTab === "todas"
+              ? "No hay ideas registradas. Crea tu primera idea!"
+              : "No hay ideas en esta categoria."}
+          </p>
+        </div>
+      ) : (
+        <div className="bg-card overflow-hidden rounded-xl shadow-2xl">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-surface-highest">
+                <TableHead>Nombre</TableHead>
+                <TableHead className="hidden md:table-cell">Idea</TableHead>
+                <TableHead>Costo</TableHead>
+                <TableHead>Prioridad</TableHead>
+                <TableHead>Estado</TableHead>
+                <TableHead className="hidden lg:table-cell">
+                  Plazo / Fecha
+                </TableHead>
+                <TableHead className="w-10" />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredIdeas.map((idea) => (
+                <TableRow key={idea.id} className="cursor-pointer">
+                  <TableCell>
+                    <div className="flex items-center gap-3">
+                      <UserAvatar
+                        name={idea.user_name}
+                        avatarUrl={idea.user_avatar_url}
+                      />
+                      <span className="hover:text-primary font-medium transition-colors">
                         {idea.nombre}
-                      </TableCell>
-                      <TableCell className="text-muted-foreground hidden max-w-[200px] truncate md:table-cell">
-                        {idea.idea}
-                      </TableCell>
-                      <TableCell>
-                        <CostBadge costo={idea.costo} />
-                      </TableCell>
-                      <TableCell>
-                        <PriorityBadge prioridad={idea.prioridad} />
-                      </TableCell>
-                      <TableCell>
-                        <StatusBadge estado={idea.estado} />
-                      </TableCell>
-                      <TableCell className="text-muted-foreground hidden text-sm lg:table-cell">
+                      </span>
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-muted-foreground hidden max-w-[200px] truncate md:table-cell">
+                    {idea.idea}
+                  </TableCell>
+                  <TableCell>
+                    <CostBadge costo={idea.costo} />
+                  </TableCell>
+                  <TableCell>
+                    <PriorityBadge prioridad={idea.prioridad} />
+                  </TableCell>
+                  <TableCell>
+                    <StatusBadge estado={idea.estado} />
+                  </TableCell>
+                  <TableCell className="hidden lg:table-cell">
+                    <div className="flex flex-col">
+                      <span className="text-sm font-bold">
                         {idea.plazo_estimado ?? "—"}
-                      </TableCell>
-                      <TableCell className="text-muted-foreground hidden text-right text-sm sm:table-cell">
+                      </span>
+                      <span className="text-muted-foreground text-xs">
                         {new Date(idea.created_at).toLocaleDateString("es-ES")}
-                      </TableCell>
-                      <TableCell>
-                        <IdeaRowActions
-                          onEdit={() => handleEdit(idea)}
-                          onDelete={() => handleDeleteClick(idea)}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <UserAvatar
-                          name={idea.user_name}
-                          avatarUrl={idea.user_avatar_url}
-                        />
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          )}
-        </TabsContent>
-      </Tabs>
+                      </span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <IdeaRowActions
+                      onEdit={() => handleEdit(idea)}
+                      onDelete={() => handleDeleteClick(idea)}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      )}
 
       <IdeaFormSheet
+        key={editingIdea?.id ?? "new"}
         open={sheetOpen}
         onOpenChange={setSheetOpen}
         idea={editingIdea}

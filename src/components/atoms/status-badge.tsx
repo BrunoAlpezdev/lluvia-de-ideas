@@ -1,13 +1,25 @@
 import { Badge } from "@/components/ui/badge";
 import type { Idea } from "@/lib/types/database";
 
-const statusStyles: Record<Idea["estado"], string> = {
-  Idea: "bg-blue-100 text-blue-800 hover:bg-blue-100",
-  "En análisis": "bg-purple-100 text-purple-800 hover:bg-purple-100",
-  "En desarrollo": "bg-orange-100 text-orange-800 hover:bg-orange-100",
-  Descartada: "bg-gray-100 text-gray-800 hover:bg-gray-100",
+const statusConfig: Record<Idea["estado"], { bg: string; dot: string }> = {
+  Idea: { bg: "bg-[#a7a5ff]/10 text-[#a7a5ff]", dot: "bg-[#a7a5ff]" },
+  "En análisis": {
+    bg: "bg-[#ac8aff]/10 text-[#ac8aff]",
+    dot: "bg-[#ac8aff]",
+  },
+  "En desarrollo": {
+    bg: "bg-[#f97316]/10 text-[#f97316]",
+    dot: "bg-[#f97316]",
+  },
+  Descartada: { bg: "bg-[#6d758c]/10 text-[#6d758c]", dot: "bg-[#6d758c]" },
 };
 
 export function StatusBadge({ estado }: { estado: Idea["estado"] }) {
-  return <Badge className={statusStyles[estado]}>{estado}</Badge>;
+  const { bg, dot } = statusConfig[estado];
+  return (
+    <Badge className={bg}>
+      <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />
+      {estado}
+    </Badge>
+  );
 }

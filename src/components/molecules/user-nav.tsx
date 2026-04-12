@@ -31,7 +31,7 @@ export function UserNav({ email, avatarUrl, name }: UserNavProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="ring-offset-background focus-visible:ring-ring cursor-pointer rounded-full outline-none focus-visible:ring-2">
+      <DropdownMenuTrigger className="focus-visible:ring-primary cursor-pointer rounded-full outline-none focus-visible:ring-2">
         <UserAvatar
           name={name ?? email}
           avatarUrl={avatarUrl}

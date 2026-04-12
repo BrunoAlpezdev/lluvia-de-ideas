@@ -16,7 +16,7 @@ interface IdeaRowActionsProps {
 export function IdeaRowActions({ onEdit, onDelete }: IdeaRowActionsProps) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="hover:bg-accent inline-flex h-8 w-8 items-center justify-center rounded-md">
+      <DropdownMenuTrigger className="hover:bg-surface-bright inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors">
         <MoreHorizontal className="h-4 w-4" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -26,7 +26,7 @@ export function IdeaRowActions({ onEdit, onDelete }: IdeaRowActionsProps) {
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={onDelete}
-          className="cursor-pointer text-red-600 focus:text-red-600"
+          className="text-destructive focus:text-destructive cursor-pointer"
         >
           <Trash2 className="mr-2 h-4 w-4" />
           Eliminar
