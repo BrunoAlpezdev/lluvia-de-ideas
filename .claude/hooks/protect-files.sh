@@ -4,6 +4,12 @@
 
 FILE="$CLAUDE_FILE_PATH"
 
+# Block generated files
+if echo "$FILE" | grep -qE '(generated-|\.gen\.|\.generated\.)'; then
+  echo "BLOCKED: Cannot edit generated files — regenerate instead"
+  exit 2
+fi
+
 # Block lock files
 if echo "$FILE" | grep -qE '(pnpm-lock\.yaml|yarn\.lock|package-lock\.json)'; then
   echo "BLOCKED: Cannot edit lock files — run pnpm install instead"
@@ -19,6 +25,12 @@ fi
 # Block shadcn/ui generated components
 if echo "$FILE" | grep -qE 'src/components/ui/'; then
   echo "BLOCKED: shadcn/ui components are generated. Use 'pnpm dlx shadcn@latest add <component>' to regenerate"
+  exit 2
+fi
+
+# Block coverage config (humans only)
+if echo "$FILE" | grep -q 'vitest.coverage'; then
+  echo "BLOCKED: Coverage thresholds can only be changed by humans"
   exit 2
 fi
 
