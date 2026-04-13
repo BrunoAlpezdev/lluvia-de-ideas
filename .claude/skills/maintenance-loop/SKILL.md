@@ -23,41 +23,50 @@ Which one?
 ## For Each Type
 
 ### Stale Branch Cleanup
+
 - List branches with last commit date
 - Check if PRs are merged (compare against `master`)
 - Report what would be deleted
 - Delete after user confirmation
 
 ### Dependency Audit
+
 ```bash
 pnpm audit        # vulnerabilities
 pnpm outdated     # version freshness
 ```
+
 Categorize: critical (security) vs major vs minor. Report with recommendations.
 
 ### Test Health
+
 Not yet configured — activate this pattern when a test framework (vitest or similar) is added.
 
 When active:
+
 - Run full test suite, capture output
 - Compare to last known good run
 - Report new failures, duration regressions
 - Flag source changes without test updates
 
 ### Error Monitoring
+
 Requires MCP integration with an error tracking service (Sentry, Bugsnag, etc.). Not yet configured.
 
 When active:
+
 - Fetch recent errors
 - Deduplicate, assess severity
 - Recommend: fix now / create ticket / ignore
 
 ### Code Quality
+
 - Run `pnpm lint`, compare to baseline
 - Find new files missing tests
 - Report regressions only (not total violations)
 
 ### Custom
+
 Interview: what to check, what's good vs bad, what action to take, how often.
 
 ## Scheduling

@@ -3,16 +3,16 @@ import type { Idea } from "@/lib/types/database";
 
 const costConfig: Record<string, { bg: string; dot: string }> = {
   Bajo: {
-    bg: "bg-[#34d399]/10 text-[#34d399] border border-[#34d399]/20",
-    dot: "bg-[#34d399]",
+    bg: "bg-cost-bajo/10 text-cost-bajo border border-cost-bajo/20",
+    dot: "bg-cost-bajo",
   },
   Medio: {
-    bg: "bg-[#fbbf24]/10 text-[#fbbf24] border border-[#fbbf24]/20",
-    dot: "bg-[#fbbf24]",
+    bg: "bg-cost-medio/10 text-cost-medio border border-cost-medio/20",
+    dot: "bg-cost-medio",
   },
   Alto: {
-    bg: "bg-[#ff6e84]/10 text-[#ff6e84] border border-[#ff6e84]/20",
-    dot: "bg-[#ff6e84]",
+    bg: "bg-cost-alto/10 text-cost-alto border border-cost-alto/20",
+    dot: "bg-cost-alto",
   },
 };
 

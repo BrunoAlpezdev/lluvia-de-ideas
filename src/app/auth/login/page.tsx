@@ -38,7 +38,7 @@ export default function LoginPage() {
 
         <div className="flex flex-col items-center text-center">
           {/* Icon circle */}
-          <div className="bg-surface-bright mb-8 flex h-16 w-16 items-center justify-center rounded-full border border-white/5 shadow-inner">
+          <div className="bg-surface-bright border-border/30 mb-8 flex h-16 w-16 items-center justify-center rounded-full border shadow-inner">
             <Lightbulb className="text-primary h-8 w-8" />
           </div>
 

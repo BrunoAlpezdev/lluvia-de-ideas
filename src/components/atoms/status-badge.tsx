@@ -3,20 +3,20 @@ import type { Idea } from "@/lib/types/database";
 
 const statusConfig: Record<Idea["estado"], { bg: string; dot: string }> = {
   Idea: {
-    bg: "bg-[#a7a5ff]/10 text-[#a7a5ff] border border-[#a7a5ff]/20",
-    dot: "bg-[#a7a5ff]",
+    bg: "bg-status-idea/10 text-status-idea border border-status-idea/20",
+    dot: "bg-status-idea",
   },
   "En análisis": {
-    bg: "bg-[#ac8aff]/10 text-[#ac8aff] border border-[#ac8aff]/20",
-    dot: "bg-[#ac8aff]",
+    bg: "bg-status-analisis/10 text-status-analisis border border-status-analisis/20",
+    dot: "bg-status-analisis",
   },
   "En desarrollo": {
-    bg: "bg-[#f97316]/10 text-[#f97316] border border-[#f97316]/20",
-    dot: "bg-[#f97316]",
+    bg: "bg-status-desarrollo/10 text-status-desarrollo border border-status-desarrollo/20",
+    dot: "bg-status-desarrollo",
   },
   Descartada: {
-    bg: "bg-[#6d758c]/10 text-[#6d758c] border border-[#6d758c]/20",
-    dot: "bg-[#6d758c]",
+    bg: "bg-status-descartada/10 text-status-descartada border border-status-descartada/20",
+    dot: "bg-status-descartada",
   },
 };
 

@@ -10,8 +10,6 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-primary text-primary-foreground hover:bg-primary/80 font-semibold",
-        gradient:
-          "border-0 font-semibold text-[#060e20] [background:linear-gradient(135deg,#a7a5ff_0%,#645efb_100%)] hover:[background:linear-gradient(135deg,#b5b3ff_0%,#7a75fc_100%)]",
         outline:
           "border-border bg-transparent hover:bg-surface-bright hover:text-foreground",
         secondary:

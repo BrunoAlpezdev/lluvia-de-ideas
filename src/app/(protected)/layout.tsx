@@ -23,9 +23,7 @@ export default async function ProtectedLayout({
         avatarUrl={user.user_metadata?.avatar_url}
         name={user.user_metadata?.full_name}
       />
-      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6">
-        {children}
-      </main>
+      <main className="w-full flex-1 px-6 py-4">{children}</main>
     </div>
   );
 }

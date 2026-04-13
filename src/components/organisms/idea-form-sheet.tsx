@@ -143,7 +143,7 @@ export function IdeaFormSheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="overflow-y-auto sm:max-w-xl">
+      <SheetContent side="right" className="overflow-y-auto">
         <SheetHeader>
           <SheetTitle>{isEditing ? "Editar idea" : "Nueva idea"}</SheetTitle>
           <SheetDescription>
@@ -153,7 +153,10 @@ export function IdeaFormSheet({
           </SheetDescription>
         </SheetHeader>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8 px-4 pb-4">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-10 px-8 pb-8"
+        >
           {/* Informacion Basica */}
           <section className="space-y-3">
             <h3 className="text-muted-foreground flex items-center gap-2 text-sm font-bold tracking-[0.2em] uppercase">
@@ -439,8 +442,7 @@ export function IdeaFormSheet({
             <Button
               type="submit"
               disabled={loading}
-              variant="gradient"
-              className="w-full text-sm font-extrabold tracking-widest uppercase"
+              className="w-full text-sm font-bold"
             >
               {loading
                 ? "Guardando..."

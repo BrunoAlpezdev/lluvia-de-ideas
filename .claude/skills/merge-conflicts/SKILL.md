@@ -15,16 +15,17 @@ git diff --name-only --diff-filter=U
 
 ## Step 2: Categorize Each Conflict
 
-| Category | Description | Resolution |
-|----------|-------------|------------|
-| Trivial | Only one side changed meaningfully | Take the meaningful side |
-| One-side | Both touched the file, different sections | Keep both |
-| Combinable | Same section, compatible changes | Combine manually |
-| Semantic | Same section, incompatible logic | Requires understanding intent |
+| Category   | Description                               | Resolution                    |
+| ---------- | ----------------------------------------- | ----------------------------- |
+| Trivial    | Only one side changed meaningfully        | Take the meaningful side      |
+| One-side   | Both touched the file, different sections | Keep both                     |
+| Combinable | Same section, compatible changes          | Combine manually              |
+| Semantic   | Same section, incompatible logic          | Requires understanding intent |
 
 ## Step 3: Resolve Incrementally
 
 For each file:
+
 1. Read both sides of every conflict marker
 2. Determine category
 3. Apply resolution

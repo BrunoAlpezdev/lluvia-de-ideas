@@ -15,16 +15,16 @@ interface RecentIdeasTableProps {
 }
 
 const statusColors: Record<Idea["estado"], string> = {
-  Idea: "#a7a5ff",
-  "En análisis": "#ac8aff",
-  "En desarrollo": "#f97316",
-  Descartada: "#6d758c",
+  Idea: "var(--status-idea)",
+  "En análisis": "var(--status-analisis)",
+  "En desarrollo": "var(--status-desarrollo)",
+  Descartada: "var(--status-descartada)",
 };
 
 const priorityColors: Record<Idea["prioridad"], string> = {
-  Alta: "#ff6e84",
-  Media: "#fbbf24",
-  Baja: "#34d399",
+  Alta: "var(--priority-alta)",
+  Media: "var(--priority-media)",
+  Baja: "var(--priority-baja)",
 };
 
 export function RecentIdeasTable({ ideas }: RecentIdeasTableProps) {
@@ -46,7 +46,7 @@ export function RecentIdeasTable({ ideas }: RecentIdeasTableProps) {
   }
 
   return (
-    <div className="bg-card overflow-hidden rounded-xl">
+    <div className="bg-card border-border/30 overflow-hidden rounded-xl border shadow-sm">
       <div className="flex items-center justify-between px-6 py-5">
         <h2 className="text-muted-foreground text-sm font-bold tracking-wider uppercase">
           Ideas Recientes
@@ -60,29 +60,29 @@ export function RecentIdeasTable({ ideas }: RecentIdeasTableProps) {
       </div>
       <Table>
         <TableHeader>
-          <TableRow className="hover:bg-transparent">
-            <TableHead className="bg-[#192540] px-6 py-3 text-xs font-bold tracking-wider uppercase">
+          <TableRow className="bg-surface-highest hover:bg-surface-highest">
+            <TableHead className="px-6 py-3 text-xs font-bold tracking-wider uppercase">
               Nombre
             </TableHead>
-            <TableHead className="bg-[#192540] px-6 py-3 text-xs font-bold tracking-wider uppercase">
+            <TableHead className="px-6 py-3 text-xs font-bold tracking-wider uppercase">
               Estado
             </TableHead>
-            <TableHead className="bg-[#192540] px-6 py-3 text-xs font-bold tracking-wider uppercase">
+            <TableHead className="px-6 py-3 text-xs font-bold tracking-wider uppercase">
               Prioridad
             </TableHead>
-            <TableHead className="bg-[#192540] px-6 py-3 text-right text-xs font-bold tracking-wider uppercase">
+            <TableHead className="px-6 py-3 text-right text-xs font-bold tracking-wider uppercase">
               Fecha
             </TableHead>
-            <TableHead className="w-10 bg-[#192540] px-6 py-3" />
+            <TableHead className="w-10 px-6 py-3" />
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody className="divide-border/20 divide-y">
           {recent.map((idea) => (
             <TableRow key={idea.id}>
-              <TableCell className="px-6 py-5 font-medium">
+              <TableCell className="px-6 py-4 font-medium">
                 {idea.nombre}
               </TableCell>
-              <TableCell className="px-6 py-5">
+              <TableCell className="px-6 py-4">
                 <span
                   className="flex items-center gap-2 text-xs font-bold"
                   style={{ color: statusColors[idea.estado] }}
@@ -96,7 +96,7 @@ export function RecentIdeasTable({ ideas }: RecentIdeasTableProps) {
                   {idea.estado}
                 </span>
               </TableCell>
-              <TableCell className="px-6 py-5">
+              <TableCell className="px-6 py-4">
                 <span
                   className="flex items-center gap-2 text-xs font-bold"
                   style={{ color: priorityColors[idea.prioridad] }}
@@ -110,10 +110,10 @@ export function RecentIdeasTable({ ideas }: RecentIdeasTableProps) {
                   {idea.prioridad}
                 </span>
               </TableCell>
-              <TableCell className="text-muted-foreground px-6 py-5 text-right text-sm">
+              <TableCell className="text-muted-foreground px-6 py-4 text-right text-sm">
                 {new Date(idea.created_at).toLocaleDateString("es-ES")}
               </TableCell>
-              <TableCell className="px-6 py-5">
+              <TableCell className="px-6 py-4">
                 <UserAvatar
                   name={idea.user_name}
                   avatarUrl={idea.user_avatar_url}

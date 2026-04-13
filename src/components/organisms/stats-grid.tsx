@@ -6,22 +6,22 @@ interface StatsGridProps {
 }
 
 const statusColors: Record<Idea["estado"], string> = {
-  Idea: "#a7a5ff",
-  "En análisis": "#ac8aff",
-  "En desarrollo": "#f97316",
-  Descartada: "#6d758c",
+  Idea: "var(--status-idea)",
+  "En análisis": "var(--status-analisis)",
+  "En desarrollo": "var(--status-desarrollo)",
+  Descartada: "var(--status-descartada)",
 };
 
 const priorityColors: Record<Idea["prioridad"], string> = {
-  Alta: "#ff6e84",
-  Media: "#fbbf24",
-  Baja: "#34d399",
+  Alta: "var(--priority-alta)",
+  Media: "var(--priority-media)",
+  Baja: "var(--priority-baja)",
 };
 
 const costColors: Record<string, string> = {
-  Bajo: "#34d399",
-  Medio: "#fbbf24",
-  Alto: "#ff6e84",
+  Bajo: "var(--cost-bajo)",
+  Medio: "var(--cost-medio)",
+  Alto: "var(--cost-alto)",
 };
 
 export function StatsGrid({ ideas }: StatsGridProps) {
@@ -71,7 +71,7 @@ export function StatsGrid({ ideas }: StatsGridProps) {
         {/* Side Cards - 1/3 width */}
         <div className="flex flex-col gap-6">
           {/* By Status Card */}
-          <div className="bg-card rounded-xl border-t-4 border-[#ac8aff] p-6">
+          <div className="bg-card border-status-analisis rounded-xl border-t-4 p-6">
             <p className="text-muted-foreground mb-4 text-sm font-bold tracking-wider uppercase">
               POR ESTADO
             </p>
@@ -90,7 +90,7 @@ export function StatsGrid({ ideas }: StatsGridProps) {
                   <span
                     className="rounded px-2 py-0.5 text-xs font-bold"
                     style={{
-                      backgroundColor: `${statusColors[s]}1a`,
+                      backgroundColor: `color-mix(in srgb, ${statusColors[s]} 10%, transparent)`,
                       color: statusColors[s],
                     }}
                   >
@@ -102,7 +102,7 @@ export function StatsGrid({ ideas }: StatsGridProps) {
           </div>
 
           {/* By Priority Card */}
-          <div className="bg-card rounded-xl border-t-4 border-[#9093ff] p-6">
+          <div className="bg-card border-primary rounded-xl border-t-4 p-6">
             <p className="text-muted-foreground mb-4 text-sm font-bold tracking-wider uppercase">
               POR PRIORIDAD
             </p>
@@ -119,7 +119,7 @@ export function StatsGrid({ ideas }: StatsGridProps) {
                   <span
                     className="rounded px-2 py-0.5 text-xs font-bold"
                     style={{
-                      backgroundColor: `${priorityColors[p]}1a`,
+                      backgroundColor: `color-mix(in srgb, ${priorityColors[p]} 10%, transparent)`,
                       color: priorityColors[p],
                     }}
                   >
@@ -169,7 +169,7 @@ export function StatsGrid({ ideas }: StatsGridProps) {
                 <span
                   className="rounded px-2 py-0.5 text-xs font-bold"
                   style={{
-                    backgroundColor: `${statusColors[s]}1a`,
+                    backgroundColor: `color-mix(in srgb, ${statusColors[s]} 10%, transparent)`,
                     color: statusColors[s],
                   }}
                 >

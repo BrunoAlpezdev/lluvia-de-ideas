@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* ─── Custom variants (previously from shadcn/tailwind.css) ─── */
+/* ─── Custom variants ─── */
 
 @theme inline {
   @keyframes accordion-down {
@@ -100,7 +100,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ─── Lluvia Obsidian theme tokens ─── */
+/* ─── Theme tokens ─── */
 
 @theme inline {
   --color-background: var(--background);
@@ -144,50 +144,76 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-  /* Obsidian surface hierarchy */
+  /* Surface hierarchy */
   --color-surface-bright: var(--surface-bright);
   --color-surface-highest: var(--surface-container-highest);
   --color-primary-dim: var(--primary-dim);
+  /* Semantic badge colors */
+  --color-status-idea: var(--status-idea);
+  --color-status-analisis: var(--status-analisis);
+  --color-status-desarrollo: var(--status-desarrollo);
+  --color-status-descartada: var(--status-descartada);
+  --color-priority-alta: var(--priority-alta);
+  --color-priority-media: var(--priority-media);
+  --color-priority-baja: var(--priority-baja);
+  --color-cost-bajo: var(--cost-bajo);
+  --color-cost-medio: var(--cost-medio);
+  --color-cost-alto: var(--cost-alto);
 }
 
+/* ─── Lluvia Cristal (Light) ─── */
+
 :root {
-  --background: #060e20;
-  --foreground: #dee5ff;
-  --card: #091328;
-  --card-foreground: #dee5ff;
-  --popover: #091328;
-  --popover-foreground: #dee5ff;
-  --primary: #a7a5ff;
-  --primary-foreground: #060e20;
-  --secondary: #141f38;
-  --secondary-foreground: #dee5ff;
-  --muted: #0f1930;
-  --muted-foreground: #a3aac4;
-  --accent: #141f38;
-  --accent-foreground: #dee5ff;
-  --destructive: #ff6e84;
-  --border: #40485d;
-  --input: #141f38;
-  --ring: #a7a5ff;
-  --chart-1: #a7a5ff;
-  --chart-2: #9093ff;
-  --chart-3: #ac8aff;
-  --chart-4: #645efb;
-  --chart-5: #ff6e84;
+  --background: #f8f9fa;
+  --foreground: #191c1d;
+  --card: #ffffff;
+  --card-foreground: #191c1d;
+  --popover: #ffffff;
+  --popover-foreground: #191c1d;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --secondary: #e7e8e9;
+  --secondary-foreground: #191c1d;
+  --muted: #f3f4f5;
+  --muted-foreground: #464555;
+  --accent: #e7e8e9;
+  --accent-foreground: #191c1d;
+  --destructive: #ba1a1a;
+  --border: #c7c4d8;
+  --input: #e7e8e9;
+  --ring: #4f46e5;
+  --chart-1: #4f46e5;
+  --chart-2: #58579b;
+  --chart-3: #7e3000;
+  --chart-4: #3525cd;
+  --chart-5: #ba1a1a;
   --radius: 0.625rem;
-  --sidebar: #091328;
-  --sidebar-foreground: #dee5ff;
-  --sidebar-primary: #a7a5ff;
-  --sidebar-primary-foreground: #060e20;
-  --sidebar-accent: #141f38;
-  --sidebar-accent-foreground: #dee5ff;
-  --sidebar-border: #40485d;
-  --sidebar-ring: #a7a5ff;
-  /* Obsidian surface hierarchy */
-  --surface-bright: #1f2b49;
-  --surface-container-highest: #192540;
-  --primary-dim: #645efb;
+  --sidebar: #f3f4f5;
+  --sidebar-foreground: #191c1d;
+  --sidebar-primary: #4f46e5;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e7e8e9;
+  --sidebar-accent-foreground: #191c1d;
+  --sidebar-border: #c7c4d8;
+  --sidebar-ring: #4f46e5;
+  /* Surface hierarchy */
+  --surface-bright: #f3f4f5;
+  --surface-container-highest: #e1e3e4;
+  --primary-dim: #3525cd;
+  /* Semantic badge colors */
+  --status-idea: #4f46e5;
+  --status-analisis: #7c3aed;
+  --status-desarrollo: #ea580c;
+  --status-descartada: #64748b;
+  --priority-alta: #dc2626;
+  --priority-media: #d97706;
+  --priority-baja: #059669;
+  --cost-bajo: #059669;
+  --cost-medio: #d97706;
+  --cost-alto: #dc2626;
 }
+
+/* ─── Lluvia Obsidian (Dark) ─── */
 
 .dark {
   --background: #060e20;
@@ -224,6 +250,17 @@
   --surface-bright: #1f2b49;
   --surface-container-highest: #192540;
   --primary-dim: #645efb;
+  /* Semantic badge colors */
+  --status-idea: #a7a5ff;
+  --status-analisis: #ac8aff;
+  --status-desarrollo: #f97316;
+  --status-descartada: #6d758c;
+  --priority-alta: #ff6e84;
+  --priority-media: #fbbf24;
+  --priority-baja: #34d399;
+  --cost-bajo: #34d399;
+  --cost-medio: #fbbf24;
+  --cost-alto: #ff6e84;
 }
 
 /* ─── Base layer ─── */
@@ -231,7 +268,7 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    scrollbar-color: #192540 transparent;
+    scrollbar-color: var(--surface-container-highest) transparent;
     scrollbar-width: thin;
   }
   *::-webkit-scrollbar {
@@ -242,11 +279,11 @@
     background: transparent;
   }
   *::-webkit-scrollbar-thumb {
-    background-color: #192540;
+    background-color: var(--surface-container-highest);
     border-radius: 3px;
   }
   *::-webkit-scrollbar-thumb:hover {
-    background-color: #a7a5ff;
+    background-color: var(--primary);
   }
   body {
     @apply bg-background text-foreground;
@@ -256,11 +293,11 @@
   }
 }
 
-/* ─── Obsidian utilities ─── */
+/* ─── Utilities ─── */
 
 @layer utilities {
   .glass {
-    background: rgba(6, 14, 32, 0.7);
+    background: color-mix(in srgb, var(--background) 80%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }

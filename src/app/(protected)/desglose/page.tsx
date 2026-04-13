@@ -14,11 +14,11 @@ export default async function DesglosePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-heading text-2xl font-bold tracking-tight">
-          Desglose de Ideas
+        <h1 className="font-heading text-4xl font-bold tracking-tighter uppercase italic">
+          Desglose
         </h1>
         <p className="text-muted-foreground mt-1 text-sm">
-          Vista completa con todos los campos de cada idea
+          Vista detallada de alta densidad para gestion integral
         </p>
       </div>
       <IdeasDetailTable ideas={allIdeas} />
