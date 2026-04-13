@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { UserNav } from "@/components/molecules/user-nav";
@@ -29,6 +30,11 @@ const navLinks = [
 export function Navbar({ email, avatarUrl, name }: NavbarProps) {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <header className="glass sticky top-0 z-50">
@@ -66,6 +72,7 @@ export function Navbar({ email, avatarUrl, name }: NavbarProps) {
           <button
             type="button"
             onClick={() => {
+              if (!mounted) return;
               const next =
                 theme === "system"
                   ? "light"
@@ -76,11 +83,13 @@ export function Navbar({ email, avatarUrl, name }: NavbarProps) {
             }}
             className="text-muted-foreground hover:bg-surface-bright hover:text-foreground inline-flex h-8 w-8 items-center justify-center rounded-md transition-colors"
             title={
-              theme === "system"
-                ? "Tema: Sistema"
-                : theme === "light"
-                  ? "Tema: Claro"
-                  : "Tema: Oscuro"
+              !mounted
+                ? "Cambiar tema"
+                : theme === "system"
+                  ? "Tema: Sistema"
+                  : theme === "light"
+                    ? "Tema: Claro"
+                    : "Tema: Oscuro"
             }
           >
             <Sun className="h-4 w-4 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
