@@ -63,7 +63,7 @@ export function DeleteIdeaDialog({
               type="button"
               onClick={onConfirm}
               disabled={loading}
-              className="shadow-destructive/20 rounded-lg bg-gradient-to-br from-[#ff6e84] to-[#d73357] px-6 py-3 text-sm font-bold tracking-tight text-white shadow-lg transition-all hover:opacity-90 active:scale-95 disabled:opacity-50 dark:from-[#ff6e84] dark:to-[#d73357]"
+              className="shadow-destructive/20 bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-lg px-6 py-3 text-sm font-bold tracking-tight shadow-md transition-all active:scale-95 disabled:opacity-50"
             >
               {loading ? "Eliminando..." : "Eliminar"}
             </button>

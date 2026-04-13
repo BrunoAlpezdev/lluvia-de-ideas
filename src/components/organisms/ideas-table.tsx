@@ -224,12 +224,15 @@ export function IdeasTable({
                   <tr
                     key={idea.id}
                     className={cn(
-                      "group hover:bg-surface-bright cursor-pointer",
+                      "group hover:bg-surface-bright",
                       idea.estado === "Descartada" && "opacity-60",
                     )}
                   >
                     {/* Sticky Name */}
-                    <td className="bg-card group-hover:bg-surface-bright sticky left-0 z-10 px-5 py-3 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.1)]">
+                    <td
+                      onClick={() => router.push(`/ideas/${idea.id}`)}
+                      className="bg-card group-hover:bg-surface-bright hover:bg-surface-highest sticky left-0 z-10 cursor-pointer px-5 py-3 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.1)]"
+                    >
                       <div className="flex items-center gap-3">
                         <div
                           className="h-8 w-1 flex-shrink-0 rounded-full"
