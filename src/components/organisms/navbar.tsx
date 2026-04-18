@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { UserNav } from "@/components/molecules/user-nav";
@@ -29,11 +29,11 @@ const navLinks = [
 export function Navbar({ email, avatarUrl, name }: NavbarProps) {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   return (
     <header className="glass sticky top-0 z-50">
