@@ -260,7 +260,7 @@ export function IdeasTable({
                     <td className="px-5 py-3">
                       <CostBadge costo={idea.costo} />
                     </td>
-                    <td className="text-muted-foreground px-5 py-3 text-sm">
+                    <td className="text-muted-foreground max-w-[200px] truncate px-5 py-3 text-sm">
                       {idea.plan_de_negocio ?? (
                         <span className="text-muted-foreground/40">—</span>
                       )}
@@ -270,42 +270,42 @@ export function IdeasTable({
                         <span className="text-muted-foreground/40">—</span>
                       )}
                     </td>
-                    <td className="text-muted-foreground px-5 py-3 text-sm">
+                    <td className="text-muted-foreground max-w-[200px] truncate px-5 py-3 text-sm">
                       {idea.estructura ?? (
                         <span className="text-muted-foreground/40">—</span>
                       )}
                     </td>
-                    <td className="text-muted-foreground px-5 py-3 text-sm">
+                    <td className="text-muted-foreground max-w-[200px] truncate px-5 py-3 text-sm">
                       {idea.planificacion ?? (
                         <span className="text-muted-foreground/40">—</span>
                       )}
                     </td>
-                    <td className="text-muted-foreground px-5 py-3 text-sm">
+                    <td className="text-muted-foreground px-5 py-3 text-sm whitespace-nowrap">
                       {idea.plazo_estimado ?? (
                         <span className="text-muted-foreground/40">—</span>
                       )}
                     </td>
-                    <td className="text-muted-foreground px-5 py-3 text-sm">
+                    <td className="text-muted-foreground max-w-[200px] truncate px-5 py-3 text-sm">
                       {idea.mercado_objetivo ?? (
                         <span className="text-muted-foreground/40">—</span>
                       )}
                     </td>
-                    <td className="text-muted-foreground px-5 py-3 text-sm">
+                    <td className="text-muted-foreground max-w-[200px] truncate px-5 py-3 text-sm">
                       {idea.competencia ?? (
                         <span className="text-muted-foreground/40">—</span>
                       )}
                     </td>
-                    <td className="text-muted-foreground px-5 py-3 text-sm">
+                    <td className="text-muted-foreground max-w-[200px] truncate px-5 py-3 text-sm">
                       {idea.diferenciador_clave ?? (
                         <span className="text-muted-foreground/40">—</span>
                       )}
                     </td>
-                    <td className="text-muted-foreground px-5 py-3 text-sm">
+                    <td className="text-muted-foreground max-w-[200px] truncate px-5 py-3 text-sm">
                       {idea.proyeccion ?? (
                         <span className="text-muted-foreground/40">—</span>
                       )}
                     </td>
-                    <td className="text-muted-foreground px-5 py-3 text-sm">
+                    <td className="text-muted-foreground max-w-[200px] truncate px-5 py-3 text-sm">
                       {idea.inversion ?? (
                         <span className="text-muted-foreground/40">—</span>
                       )}
