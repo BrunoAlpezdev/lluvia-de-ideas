@@ -46,6 +46,7 @@ function getInitialForm(idea?: Idea | null): FormFields {
       estructura: null,
       planificacion: null,
       costo: null,
+      complejidad: null,
       proyeccion: null,
       inversion: null,
       mercado_objetivo: null,
@@ -64,6 +65,7 @@ function getInitialForm(idea?: Idea | null): FormFields {
     estructura: idea.estructura,
     planificacion: idea.planificacion,
     costo: idea.costo,
+    complejidad: idea.complejidad,
     proyeccion: idea.proyeccion,
     inversion: idea.inversion,
     mercado_objetivo: idea.mercado_objetivo,
@@ -339,23 +341,47 @@ export function IdeaFormSheet({
               <SectionNumber n="04" />
               Financiero
             </h3>
-            <div className="space-y-2">
-              <Label className="text-muted-foreground mb-2 text-xs font-medium">
-                Costo
-              </Label>
-              <Select
-                value={form.costo ?? undefined}
-                onValueChange={(val) => updateField("costo", val as string)}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Seleccionar costo" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Bajo">Bajo</SelectItem>
-                  <SelectItem value="Medio">Medio</SelectItem>
-                  <SelectItem value="Alto">Alto</SelectItem>
-                </SelectContent>
-              </Select>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
+                <Label className="text-muted-foreground mb-2 text-xs font-medium">
+                  Costo
+                </Label>
+                <Select
+                  value={form.costo ?? undefined}
+                  onValueChange={(val) => updateField("costo", val as string)}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Seleccionar costo" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Bajo">Bajo</SelectItem>
+                    <SelectItem value="Medio">Medio</SelectItem>
+                    <SelectItem value="Alto">Alto</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label className="text-muted-foreground mb-2 text-xs font-medium">
+                  Complejidad
+                </Label>
+                <Select
+                  value={form.complejidad ?? undefined}
+                  onValueChange={(val) =>
+                    updateField("complejidad", val as string)
+                  }
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Seleccionar" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Muy fácil">Muy fácil</SelectItem>
+                    <SelectItem value="Fácil">Fácil</SelectItem>
+                    <SelectItem value="Moderado">Moderado</SelectItem>
+                    <SelectItem value="Complejo">Complejo</SelectItem>
+                    <SelectItem value="Transversal">Transversal</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
             <div className="space-y-2">
               <Label

@@ -9,6 +9,7 @@ import { UserAvatar } from "@/components/atoms/user-avatar";
 import { StatusBadge } from "@/components/atoms/status-badge";
 import { PriorityBadge } from "@/components/atoms/priority-badge";
 import { CostBadge } from "@/components/atoms/cost-badge";
+import { ComplejidadBadge } from "@/components/atoms/complejidad-badge";
 import { IdeaRowActions } from "@/components/molecules/idea-row-actions";
 import { IdeaFormSheet } from "@/components/organisms/idea-form-sheet";
 import { DeleteIdeaDialog } from "@/components/organisms/delete-idea-dialog";
@@ -183,6 +184,9 @@ export function IdeasTable({
                   <th className="text-muted-foreground min-w-[90px] px-5 py-3 text-left text-[10px] font-bold tracking-[0.15em] uppercase">
                     Costo
                   </th>
+                  <th className="text-muted-foreground min-w-[120px] px-5 py-3 text-left text-[10px] font-bold tracking-[0.15em] uppercase">
+                    Complejidad
+                  </th>
                   <th className="text-muted-foreground min-w-[150px] px-5 py-3 text-left text-[10px] font-bold tracking-[0.15em] uppercase">
                     Plan de Negocio
                   </th>
@@ -259,6 +263,9 @@ export function IdeasTable({
                     </td>
                     <td className="px-5 py-3">
                       <CostBadge costo={idea.costo} />
+                    </td>
+                    <td className="px-5 py-3">
+                      <ComplejidadBadge complejidad={idea.complejidad} />
                     </td>
                     <td className="text-muted-foreground max-w-[600px] truncate px-5 py-3 text-sm">
                       {idea.plan_de_negocio ?? (

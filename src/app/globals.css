@@ -159,6 +159,11 @@
   --color-cost-bajo: var(--cost-bajo);
   --color-cost-medio: var(--cost-medio);
   --color-cost-alto: var(--cost-alto);
+  --color-complejidad-muy-facil: var(--complejidad-muy-facil);
+  --color-complejidad-facil: var(--complejidad-facil);
+  --color-complejidad-moderado: var(--complejidad-moderado);
+  --color-complejidad-complejo: var(--complejidad-complejo);
+  --color-complejidad-transversal: var(--complejidad-transversal);
 }
 
 /* ─── Lluvia Cristal (Light) ─── */
@@ -211,6 +216,12 @@
   --cost-bajo: #059669;
   --cost-medio: #d97706;
   --cost-alto: #dc2626;
+  /* Complejidad */
+  --complejidad-muy-facil: #059669;
+  --complejidad-facil: #0284c7;
+  --complejidad-moderado: #7c3aed;
+  --complejidad-complejo: #ea580c;
+  --complejidad-transversal: #dc2626;
 }
 
 /* ─── Lluvia Obsidian (Dark) ─── */
@@ -261,6 +272,12 @@
   --cost-bajo: #34d399;
   --cost-medio: #fbbf24;
   --cost-alto: #ff6e84;
+  /* Complejidad */
+  --complejidad-muy-facil: #34d399;
+  --complejidad-facil: #38bdf8;
+  --complejidad-moderado: #ac8aff;
+  --complejidad-complejo: #f97316;
+  --complejidad-transversal: #ff6e84;
 }
 
 /* ─── Base layer ─── */

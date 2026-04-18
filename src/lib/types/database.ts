@@ -8,6 +8,13 @@ export type Idea = {
   estructura: string | null;
   planificacion: string | null;
   costo: "Bajo" | "Medio" | "Alto" | null;
+  complejidad:
+    | "Muy fácil"
+    | "Fácil"
+    | "Moderado"
+    | "Complejo"
+    | "Transversal"
+    | null;
   proyeccion: string | null;
   inversion: string | null;
   mercado_objetivo: string | null;
