@@ -1,16 +1,9 @@
-import { createClient } from "@/lib/supabase/server";
 import { StatsGrid } from "@/components/organisms/stats-grid";
 import { RecentIdeasTable } from "@/components/organisms/recent-ideas-table";
-import type { Idea } from "@/lib/types/database";
+import { getAllIdeas } from "@/lib/firebase/ideas";
 
 export default async function DashboardPage() {
-  const supabase = await createClient();
-  const { data: ideas } = await supabase
-    .from("ideas")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  const allIdeas = (ideas ?? []) as Idea[];
+  const ideas = await getAllIdeas();
 
   return (
     <div className="space-y-6">
@@ -22,8 +15,8 @@ export default async function DashboardPage() {
           Resumen general de tu ecosistema de ideas
         </p>
       </div>
-      <StatsGrid ideas={allIdeas} />
-      <RecentIdeasTable ideas={allIdeas} />
+      <StatsGrid ideas={ideas} />
+      <RecentIdeasTable ideas={ideas} />
     </div>
   );
 }

@@ -1,18 +1,36 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
+import { signInWithPopup } from "firebase/auth";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
+import { auth, googleProvider } from "@/lib/firebase/auth-client";
 import { GoogleIcon } from "@/components/atoms/google-icon";
 import { Lightbulb } from "lucide-react";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   const handleGoogleLogin = async () => {
-    const supabase = createClient();
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
+    setLoading(true);
+    try {
+      const credential = await signInWithPopup(auth, googleProvider);
+      const idToken = await credential.user.getIdToken();
+      const res = await fetch("/api/auth/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken }),
+      });
+      if (!res.ok) throw new Error("No se pudo crear la sesión");
+      router.replace("/dashboard");
+      router.refresh();
+    } catch (e) {
+      const message =
+        e instanceof Error ? e.message : "Error al iniciar sesión";
+      toast.error(message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -56,10 +74,13 @@ export default function LoginPage() {
           <button
             type="button"
             onClick={handleGoogleLogin}
-            className="bg-surface-bright text-foreground hover:bg-surface-highest mt-8 flex w-full items-center justify-center gap-3 rounded-lg border border-[#40485d]/30 px-6 py-4 transition-all active:scale-[0.98]"
+            disabled={loading}
+            className="bg-surface-bright text-foreground hover:bg-surface-highest mt-8 flex w-full items-center justify-center gap-3 rounded-lg border border-[#40485d]/30 px-6 py-4 transition-all active:scale-[0.98] disabled:opacity-60"
           >
             <GoogleIcon />
-            <span>Iniciar sesión con Google</span>
+            <span>
+              {loading ? "Conectando..." : "Iniciar sesión con Google"}
+            </span>
           </button>
 
           {/* Footer inside card */}

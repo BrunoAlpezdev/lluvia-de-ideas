@@ -1,7 +1,8 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
+import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { auth } from "@/lib/firebase/auth-client";
 import { UserAvatar } from "@/components/atoms/user-avatar";
 import {
   DropdownMenu,
@@ -24,9 +25,10 @@ export function UserNav({ email, avatarUrl, name }: UserNavProps) {
   const router = useRouter();
 
   const handleLogout = async () => {
-    const supabase = createClient();
-    await supabase.auth.signOut();
+    await signOut(auth);
+    await fetch("/api/auth/session", { method: "DELETE" });
     router.push("/auth/login");
+    router.refresh();
   };
 
   return (

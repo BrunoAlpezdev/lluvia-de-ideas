@@ -1,16 +1,13 @@
-import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { Navbar } from "@/components/organisms/navbar";
+import { getCurrentUser } from "@/lib/firebase/session";
 
 export default async function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
 
   if (!user) {
     redirect("/auth/login");
@@ -20,8 +17,8 @@ export default async function ProtectedLayout({
     <div className="flex min-h-screen flex-col">
       <Navbar
         email={user.email ?? ""}
-        avatarUrl={user.user_metadata?.avatar_url}
-        name={user.user_metadata?.full_name}
+        avatarUrl={user.picture}
+        name={user.name as string | undefined}
       />
       <main className="w-full flex-1 px-6 py-4">{children}</main>
     </div>
