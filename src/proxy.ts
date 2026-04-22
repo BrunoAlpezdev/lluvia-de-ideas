@@ -3,7 +3,7 @@ import { SESSION_COOKIE } from "@/lib/firebase/session-cookie";
 
 const publicRoutes = ["/auth/login", "/api/auth/session"];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isPublic = publicRoutes.some((p) => pathname.startsWith(p));
   const hasSession = Boolean(request.cookies.get(SESSION_COOKIE)?.value);
