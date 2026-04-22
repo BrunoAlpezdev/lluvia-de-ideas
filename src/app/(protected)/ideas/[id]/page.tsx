@@ -11,8 +11,7 @@ import {
   Wallet,
 } from "lucide-react";
 
-import { createClient } from "@/lib/supabase/server";
-import type { Idea } from "@/lib/types/database";
+import { getIdeaById } from "@/lib/firebase/ideas";
 
 import { StatusBadge } from "@/components/atoms/status-badge";
 import { PriorityBadge } from "@/components/atoms/priority-badge";
@@ -26,18 +25,13 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("ideas")
-    .select("nombre, descripcion")
-    .eq("id", id)
-    .single();
+  const idea = await getIdeaById(id);
 
-  if (!data) return { title: "Idea no encontrada" };
+  if (!idea) return { title: "Idea no encontrada" };
 
   return {
-    title: `${data.nombre} - Lluvia de Ideas`,
-    description: data.descripcion || "Detalles de esta idea de negocio",
+    title: `${idea.nombre} - Lluvia de Ideas`,
+    description: idea.descripcion || "Detalles de esta idea de negocio",
   };
 }
 
@@ -47,15 +41,9 @@ export default async function IdeaDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const supabase = await createClient();
+  const idea = await getIdeaById(id);
 
-  const { data: idea, error } = await supabase
-    .from("ideas")
-    .select("*")
-    .eq("id", id)
-    .single<Idea>();
-
-  if (error || !idea) {
+  if (!idea) {
     notFound();
   }
 

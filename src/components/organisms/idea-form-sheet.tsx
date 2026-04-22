@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { createIdea, updateIdea } from "@/app/(protected)/ideas/actions";
 import {
   Sheet,
   SheetContent,
@@ -23,18 +23,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { Idea, IdeaInsert, IdeaUpdate } from "@/lib/types/database";
+import type { Idea, IdeaFormFields } from "@/lib/types/database";
 
 interface IdeaFormSheetProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   idea?: Idea | null;
-  userId: string;
-  userName?: string;
-  userAvatarUrl?: string;
 }
 
-type FormFields = Omit<IdeaInsert, "user_id" | "user_name" | "user_avatar_url">;
+type FormFields = IdeaFormFields;
 
 function getInitialForm(idea?: Idea | null): FormFields {
   if (!idea) {
@@ -89,9 +86,6 @@ export function IdeaFormSheet({
   open,
   onOpenChange,
   idea,
-  userId,
-  userName,
-  userAvatarUrl,
 }: IdeaFormSheetProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -110,32 +104,15 @@ export function IdeaFormSheet({
     }
 
     setLoading(true);
-    const supabase = createClient();
 
-    if (isEditing) {
-      const updates: IdeaUpdate = { ...form };
-      const { error } = await supabase
-        .from("ideas")
-        .update(updates)
-        .eq("id", idea.id);
-      if (error) {
-        toast.error("Error al actualizar la idea");
-      } else {
-        toast.success("Idea actualizada");
-      }
+    const result = isEditing
+      ? await updateIdea(idea.id, form)
+      : await createIdea(form);
+
+    if (!result.ok) {
+      toast.error(result.error);
     } else {
-      const insert: IdeaInsert = {
-        ...form,
-        user_id: userId,
-        user_name: userName ?? null,
-        user_avatar_url: userAvatarUrl ?? null,
-      };
-      const { error } = await supabase.from("ideas").insert(insert);
-      if (error) {
-        toast.error("Error al crear la idea");
-      } else {
-        toast.success("Idea creada");
-      }
+      toast.success(isEditing ? "Idea actualizada" : "Idea creada");
     }
 
     setLoading(false);
@@ -347,7 +324,7 @@ export function IdeaFormSheet({
                   Costo
                 </Label>
                 <Select
-                  value={form.costo ?? undefined}
+                  value={form.costo ?? ""}
                   onValueChange={(val) => updateField("costo", val as string)}
                 >
                   <SelectTrigger className="w-full">
@@ -365,7 +342,7 @@ export function IdeaFormSheet({
                   Complejidad
                 </Label>
                 <Select
-                  value={form.complejidad ?? undefined}
+                  value={form.complejidad ?? ""}
                   onValueChange={(val) =>
                     updateField("complejidad", val as string)
                   }

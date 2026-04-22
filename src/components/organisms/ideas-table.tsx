@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -13,15 +12,13 @@ import { ComplejidadBadge } from "@/components/atoms/complejidad-badge";
 import { IdeaRowActions } from "@/components/molecules/idea-row-actions";
 import { IdeaFormSheet } from "@/components/organisms/idea-form-sheet";
 import { DeleteIdeaDialog } from "@/components/organisms/delete-idea-dialog";
+import { deleteIdea } from "@/app/(protected)/ideas/actions";
 import type { Idea } from "@/lib/types/database";
 import { cn } from "@/lib/utils";
 import { Plus, Search } from "lucide-react";
 
 interface IdeasTableProps {
   ideas: Idea[];
-  userId: string;
-  userName?: string;
-  userAvatarUrl?: string;
 }
 
 const tabs = [
@@ -47,12 +44,7 @@ const statusAccent: Record<Idea["estado"], string> = {
   Descartada: "var(--status-descartada)",
 };
 
-export function IdeasTable({
-  ideas,
-  userId,
-  userName,
-  userAvatarUrl,
-}: IdeasTableProps) {
+export function IdeasTable({ ideas }: IdeasTableProps) {
   const router = useRouter();
   const [sheetOpen, setSheetOpen] = useState(false);
   const [editingIdea, setEditingIdea] = useState<Idea | null>(null);
@@ -61,7 +53,6 @@ export function IdeasTable({
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("todas");
   const [searchQuery, setSearchQuery] = useState("");
-
   const filteredIdeas = ideas.filter((i) => {
     const matchesTab =
       statusFilter[activeTab] === null || i.estado === statusFilter[activeTab];
@@ -91,14 +82,10 @@ export function IdeasTable({
   const handleDeleteConfirm = async () => {
     if (!deletingIdea) return;
     setDeleteLoading(true);
-    const supabase = createClient();
-    const { error } = await supabase
-      .from("ideas")
-      .delete()
-      .eq("id", deletingIdea.id);
+    const result = await deleteIdea(deletingIdea.id);
 
-    if (error) {
-      toast.error("Error al eliminar la idea");
+    if (!result.ok) {
+      toast.error(result.error);
     } else {
       toast.success("Idea eliminada");
     }
@@ -346,9 +333,6 @@ export function IdeasTable({
         open={sheetOpen}
         onOpenChange={setSheetOpen}
         idea={editingIdea}
-        userId={userId}
-        userName={userName}
-        userAvatarUrl={userAvatarUrl}
       />
 
       <DeleteIdeaDialog

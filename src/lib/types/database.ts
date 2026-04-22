@@ -34,3 +34,8 @@ export type IdeaInsert = Omit<Idea, "id" | "created_at" | "updated_at">;
 export type IdeaUpdate = Partial<
   Omit<Idea, "id" | "user_id" | "created_at" | "updated_at">
 >;
+
+export type IdeaFormFields = Omit<
+  IdeaInsert,
+  "user_id" | "user_name" | "user_avatar_url"
+>;
